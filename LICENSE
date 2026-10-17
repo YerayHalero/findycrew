@@ -1,0 +1,13 @@
+Copyright (c) 2026 YM Enterprise (Find Y Crew). Todos los derechos reservados.
+All rights reserved.
+
+Este repositorio es visible con fines de demostración. No se concede licencia para copiar,
+modificar, distribuir ni usar comercialmente este código, diseño o marca sin permiso
+escrito previo del titular.
+This repository is visible for demonstration purposes only. No licence is granted to copy,
+modify, distribute or commercially use this code, design or brand without prior written
+permission from the owner.
+
+Componente de terceros / Third-party component:
+qrcode-generator, © Kazuhiko Arase, MIT License (incluido en minificado dentro de app/index.html
+y index.html para generar códigos QR).
