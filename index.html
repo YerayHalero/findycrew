@@ -145,6 +145,25 @@ h2{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:12px;}
 .pilot-tag{font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;color:var(--accent);margin-bottom:6px;}
 .pilot-note h4{font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px;}
 .pilot-note p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;}
+.pilot-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.btn-line{border:1.5px solid var(--border-w);color:var(--white);background:transparent;}
+.btn-line:hover{border-color:var(--accent);color:var(--white);}
+/* heatmap feature */
+.heat-feature{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:center;margin-bottom:56px;}
+.hf-tag{font-family:var(--font-m);font-size:10.5px;letter-spacing:2px;color:var(--accent);margin-bottom:12px;}
+.heat-feature h3{font-size:clamp(24px,3vw,34px);font-weight:800;line-height:1.12;letter-spacing:-.5px;color:var(--white);margin-bottom:14px;}
+.heat-feature .hf-lead{font-size:14.5px;color:rgba(255,255,255,.66);line-height:1.7;margin-bottom:20px;max-width:46ch;}
+.hf-list{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:22px;}
+.hf-list li{display:flex;gap:12px;align-items:flex-start;}
+.hf-list .hf-ico{flex:0 0 30px;height:30px;border-radius:7px;background:rgba(255,69,0,.14);display:flex;align-items:center;justify-content:center;}
+.hf-list .hf-ico svg{width:17px;height:17px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.hf-list b{display:block;font-size:14px;color:var(--white);margin-bottom:2px;}
+.hf-list span{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.55;}
+.hf-priv{font-family:var(--font-m);font-size:10.5px;letter-spacing:.5px;color:rgba(255,255,255,.45);line-height:1.6;border-left:2px solid var(--accent);padding-left:10px;margin-bottom:24px;}
+.hf-shot{position:relative;}
+.hf-shot img{width:100%;display:block;border-radius:6px;border:1px solid var(--border-w);box-shadow:0 30px 60px -28px rgba(0,0,0,.8);}
+.hf-shot .hf-badge{position:absolute;left:-10px;top:18px;background:var(--accent);color:#fff;font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;padding:6px 10px;border-radius:2px;}
+@media(max-width:860px){.heat-feature{grid-template-columns:1fr;gap:28px;}.hf-shot{order:-1;}.hf-shot .hf-badge{left:10px;top:10px;}}
 
 /* ── CONTACT ─────────────────────────────────────────────────── */
 .contact .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:start;}
@@ -303,11 +322,11 @@ footer .foot-links a:hover{color:var(--accent);}
   <div class="wrap">
     <div>
       <h2 data-i18n="try.h2">Pruébalo en tu móvil</h2>
-      <p class="section-lead" data-i18n="try.lead">Escanea el código y explora un festival simulado: muévete por el mapa, mira a tu crew, deja un estado y cambia a la vista del organizador. Sin instalar nada.</p>
+      <p class="section-lead" data-i18n="try.lead">Escanea el código y explora un festival simulado. Al entrar eliges cómo verlo: como asistente o como organizador. Sin instalar nada.</p>
       <ul class="try-list">
         <li><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span data-i18n="try.b1">Mapa en vivo con tu crew</span></li>
         <li><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span data-i18n="try.b2">Estados y puntos de encuentro</span></li>
-        <li><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span data-i18n="try.b3">Vista del organizador: solo datos agregados</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span data-i18n="try.b3">Panel del organizador: mapa de calor, tareas al staff y avisos</span></li>
       </ul>
       <a class="btn btn-primary" href="app/?demo=1" data-app-demo data-i18n="try.cta">Abrir la demo</a>
     </div>
@@ -381,6 +400,21 @@ footer .foot-links a:hover{color:var(--accent);}
       <h2 data-i18n="org.h2">Para organizadores</h2>
       <p class="section-lead" data-i18n="org.lead">Menos gente perdida, menos carga en seguridad, más control sobre lo que pasa en tu recinto.</p>
     </div>
+    <div class="heat-feature">
+      <div>
+        <div class="hf-tag" data-i18n="heat.tag">MAPA DE CALOR EN VIVO</div>
+        <h3 data-i18n="heat.h3">Ve dónde está tu público, minuto a minuto</h3>
+        <p class="hf-lead" data-i18n="heat.lead">Cada asistente con la app aporta, de forma anónima, a un mapa de densidad del recinto. Tú ves qué zonas se llenan antes de que sea un problema y actúas desde el mismo panel.</p>
+        <ul class="hf-list">
+          <li><span class="hf-ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span><div><b data-i18n="heat.b1t">Aforo por zona y alertas</b><span data-i18n="heat.b1">Porcentaje de ocupación de cada escenario o servicio, con aviso automático al pasar del 90 %.</span></div></li>
+          <li><span class="hf-ico"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="1.5"/><path d="M9 4V3h6v1M9 12.5l2 2 4-4"/></svg></span><div><b data-i18n="heat.b2t">De la alerta a la acción en un toque</b><span data-i18n="heat.b2">Envía al miembro del staff más cercano y sigue su llegada en el mapa. Avisa a quien está en la zona.</span></div></li>
+          <li><span class="hf-ico"><svg viewBox="0 0 24 24"><rect x="4" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="16" y="3" width="4" height="17"/></svg></span><div><b data-i18n="heat.b3t">Datos para la próxima edición</b><span data-i18n="heat.b3">Picos por hora y zona para planificar accesos, barras, seguridad y negociar con patrocinadores.</span></div></li>
+        </ul>
+        <p class="hf-priv" data-i18n="heat.priv">Solo datos agregados: ninguna zona con menos de 10 personas se muestra y nunca se guardan trayectorias individuales.</p>
+        <a class="btn btn-primary" href="app/?demo=1&role=org" data-app-org data-i18n="heat.cta">Ver el panel del organizador</a>
+      </div>
+      <div class="hf-shot"><img data-shot="heat" src="assets/shot-heat-es.jpg" alt="" loading="lazy"><span class="hf-badge" data-i18n="heat.badge">DEMO EN VIVO</span></div>
+    </div>
     <div class="pillars">
       <div class="pillar">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.5 2.7-6 5.5-6s5.5 2.5 5.5 6"/><circle cx="17.5" cy="9.5" r="2.6"/><path d="M15.2 14.3c2.3.3 4.3 2.5 4.3 5.7"/></svg>
@@ -400,12 +434,11 @@ footer .foot-links a:hover{color:var(--accent);}
     </div>
     <div class="pilot-note">
       <div class="txt">
-        <div class="pilot-tag" data-i18n="pilot.tag">PRÓXIMAMENTE</div>
-        <h4 data-i18n="pilot.h4">Coordinación de equipos y voluntarios</h4>
-        <p data-i18n="pilot.p">Visibilidad y control total sobre staff y voluntarios durante tu evento. Los primeros
-           festivales en sumarse ayudan a darle forma antes del lanzamiento.</p>
+        <div class="pilot-tag" data-i18n="pilot.tag">YA EN LA DEMO</div>
+        <h4 data-i18n="pilot.h4">Coordinación de staff, tareas y avisos</h4>
+        <p data-i18n="pilot.p">Crea una incidencia, asígnala al miembro del equipo más cercano y sigue su llegada en el mapa. Envía avisos a todo el recinto o a una sola zona. Los primeros festivales en sumarse ayudan a darle forma antes del lanzamiento.</p>
       </div>
-      <a class="btn btn-primary" href="#contacto" data-i18n="pilot.cta">Acceso anticipado</a>
+      <div class="pilot-actions"><a class="btn btn-line" href="app/?demo=1&role=org" data-app-org data-i18n="pilot.try">Probarlo en la demo</a><a class="btn btn-primary" href="#contacto" data-i18n="pilot.cta">Acceso anticipado</a></div>
     </div>
   </div>
 </section>
@@ -506,11 +539,34 @@ const translations = {
   'pillar3.p':  { es:'Menos personas pidiendo ayuda a seguridad, menos carga en megafonía y objetos perdidos.',
                   en:'Fewer people asking security for help, less load on the PA system and lost-and-found.',
                   da:'Færre personer der beder sikkerheden om hjælp, mindre belastning på højttaleranlæg og hittegods.' },
-  'pilot.tag':  { es:'PRÓXIMAMENTE', en:'COMING SOON', da:'KOMMER SNART' },
-  'pilot.h4':   { es:'Coordinación de equipos y voluntarios', en:'Team and volunteer coordination', da:'Koordinering af team og frivillige' },
-  'pilot.p':    { es:'Visibilidad y control total sobre staff y voluntarios durante tu evento. Los primeros festivales en sumarse ayudan a darle forma antes del lanzamiento.',
-                  en:"Full visibility and control over staff and volunteers during your event. The first festivals to join help shape it before launch.",
-                  da:'Fuldt overblik og kontrol over personale og frivillige under dit event. De første festivaler, der er med, hjælper med at forme det inden lancering.' },
+  'pilot.tag':  { es:'YA EN LA DEMO', en:'IN THE DEMO NOW', da:'I DEMOEN NU' },
+  'pilot.h4':   { es:'Coordinación de staff, tareas y avisos', en:'Staff, task and message coordination', da:'Koordinering af personale, opgaver og beskeder' },
+  'pilot.p':    { es:'Crea una incidencia, asígnala al miembro del equipo más cercano y sigue su llegada en el mapa. Envía avisos a todo el recinto o a una sola zona. Los primeros festivales en sumarse ayudan a darle forma antes del lanzamiento.',
+                  en:"Create an incident, assign it to the nearest team member and follow them on the map. Send messages to the whole venue or a single zone. The first festivals to join help shape it before launch.",
+                  da:'Opret en hændelse, tildel den til det nærmeste teammedlem og følg dem på kortet. Send beskeder til hele området eller ét område. De første festivaler, der er med, hjælper med at forme det inden lancering.' },
+  'pilot.try':  { es:'Probarlo en la demo', en:'Try it in the demo', da:'Prøv det i demoen' },
+  'heat.tag':   { es:'MAPA DE CALOR EN VIVO', en:'LIVE HEATMAP', da:'LIVE VARMEKORT' },
+  'heat.h3':    { es:'Ve dónde está tu público, minuto a minuto', en:'See where your crowd is, minute by minute', da:'Se hvor dit publikum er, minut for minut' },
+  'heat.lead':  { es:'Cada asistente con la app aporta, de forma anónima, a un mapa de densidad del recinto. Tú ves qué zonas se llenan antes de que sea un problema y actúas desde el mismo panel.',
+                  en:'Every attendee using the app anonymously feeds a density map of the venue. You see which areas are filling up before it becomes a problem, and act from the same console.',
+                  da:'Hver gæst med appen bidrager anonymt til et tæthedskort over området. Du ser, hvilke områder der fyldes op, før det bliver et problem, og handler fra samme panel.' },
+  'heat.b1t':   { es:'Aforo por zona y alertas', en:'Capacity by zone and alerts', da:'Kapacitet pr. område og advarsler' },
+  'heat.b1':    { es:'Porcentaje de ocupación de cada escenario o servicio, con aviso automático al pasar del 90 %.',
+                  en:'Occupancy for every stage or service, with an automatic alert above 90%.',
+                  da:'Belægning for hver scene eller facilitet, med automatisk advarsel over 90 %.' },
+  'heat.b2t':   { es:'De la alerta a la acción en un toque', en:'From alert to action in one tap', da:'Fra advarsel til handling med ét tryk' },
+  'heat.b2':    { es:'Envía al miembro del staff más cercano y sigue su llegada en el mapa. Avisa a quien está en la zona.',
+                  en:'Send the nearest staff member and follow them on the map. Notify the people in that zone.',
+                  da:'Send det nærmeste personale og følg dem på kortet. Giv folk i området besked.' },
+  'heat.b3t':   { es:'Datos para la próxima edición', en:'Data for your next edition', da:'Data til næste udgave' },
+  'heat.b3':    { es:'Picos por hora y zona para planificar accesos, barras, seguridad y negociar con patrocinadores.',
+                  en:'Peaks by hour and zone to plan entrances, bars and security, and to negotiate with sponsors.',
+                  da:'Spidsbelastning pr. time og område til planlægning af indgange, barer og sikkerhed og til sponsorforhandlinger.' },
+  'heat.priv':  { es:'Solo datos agregados: ninguna zona con menos de 10 personas se muestra y nunca se guardan trayectorias individuales.',
+                  en:'Aggregated data only: no area with fewer than 10 people is shown and individual trails are never stored.',
+                  da:'Kun aggregerede data: områder med færre end 10 personer vises ikke, og individuelle spor gemmes aldrig.' },
+  'heat.cta':   { es:'Ver el panel del organizador', en:'See the organizer console', da:'Se arrangørpanelet' },
+  'heat.badge': { es:'DEMO EN VIVO', en:'LIVE DEMO', da:'LIVE DEMO' },
   'pilot.cta':  { es:'Acceso anticipado', en:'Early access', da:'Tidlig adgang' },
   'contact.h2': { es:'Hablemos', en:"Let's talk", da:'Lad os tale' },
   'contact.p':  { es:'Prototipo en fase de prueba. Si organizas un festival o evento masivo y quieres verlo en vivo, escríbenos y lo mostramos en directo.',
@@ -520,12 +576,12 @@ const translations = {
   'contact.lbl2':{ es:'RESPUESTA', en:'RESPONSE', da:'SVARTID' },
   'contact.val2':{ es:'En 24–48h', en:'Within 24–48h', da:'Inden for 24–48 timer' },
   'try.h2':     { es:'Pruébalo en tu móvil', en:'Try it on your phone', da:'Prøv det på din mobil' },
-  'try.lead':   { es:'Escanea el código y explora un festival simulado: muévete por el mapa, mira a tu crew, deja un estado y cambia a la vista del organizador. Sin instalar nada.',
-                  en:'Scan the code and explore a simulated festival: move around the map, see your crew, post a status and switch to the organizer view. Nothing to install.',
-                  da:'Scan koden og udforsk en simuleret festival: bevæg dig rundt på kortet, se din crew, skriv en status og skift til arrangørvisningen. Ingen installation.' },
+  'try.lead':   { es:'Escanea el código y explora un festival simulado. Al entrar eliges cómo verlo: como asistente o como organizador. Sin instalar nada.',
+                  en:'Scan the code and explore a simulated festival. When you enter, choose how to see it: as an attendee or as an organizer. Nothing to install.',
+                  da:'Scan koden og udforsk en simuleret festival. Når du går ind, vælger du, hvordan du vil se den: som gæst eller som arrangør. Ingen installation.' },
   'try.b1':     { es:'Mapa en vivo con tu crew', en:'Live map with your crew', da:'Live-kort med din crew' },
   'try.b2':     { es:'Estados y puntos de encuentro', en:'Statuses and meeting points', da:'Statusser og mødesteder' },
-  'try.b3':     { es:'Vista del organizador: solo datos agregados', en:'Organizer view: aggregated data only', da:'Arrangørvisning: kun aggregerede data' },
+  'try.b3':     { es:'Panel del organizador: mapa de calor, tareas al staff y avisos', en:'Organizer console: heatmap, staff tasks and messages', da:'Arrangørpanel: varmekort, opgaver til personale og beskeder' },
   'try.cta':    { es:'Abrir la demo', en:'Open the demo', da:'Åbn demoen' },
   'try.scan':   { es:'Escanea con la cámara de tu móvil', en:'Scan with your phone camera', da:'Scan med dit kamera' },
   'try.note':   { es:'Datos simulados. No se guarda nada.', en:'Simulated data. Nothing is stored.', da:'Simulerede data. Intet gemmes.' },
@@ -559,6 +615,7 @@ function applyLang(lang){
   // keep the language when jumping into the app
   document.querySelectorAll('[data-app-demo]').forEach(a=>{ a.href='app/?demo=1&lang='+lang; });
   document.querySelectorAll('[data-app-real]').forEach(a=>{ a.href='app/?lang='+lang; });
+  document.querySelectorAll('[data-app-org]').forEach(a=>{ a.href='app/?demo=1&role=org&lang='+lang; });
   document.querySelectorAll('img[data-shot]').forEach(i=>{ i.src='assets/shot-'+i.dataset.shot+'-'+lang+'.jpg'; });
 }
 

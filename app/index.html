@@ -274,6 +274,113 @@ select.lang option{color:#000}
 #world.org .peep,#world.org .meet{display:none}
 @media (max-width:420px){.hide-s{display:none}}
 @media (prefers-reduced-motion:reduce){.mk{transition:none}.spl-mark,.spl-word,.spl-sub,.spl-bar{animation:none;opacity:1}}
+/* ── ROLE PICKER ─────────────────────── */
+#role{align-items:center;justify-content:center;padding:56px 18px 28px;overflow-y:auto}
+.role-wrap{max-width:780px;width:100%;display:flex;flex-direction:column;gap:10px;text-align:center;margin:auto}
+.role-title{font-size:30px;font-weight:800;letter-spacing:-.6px;line-height:1.15}
+.role-sub{color:var(--ink2);font-size:14px}
+.role-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.role-card{background:#fff;border:1.5px solid var(--border2);border-radius:6px;padding:22px 20px 18px;text-align:left;display:flex;flex-direction:column;gap:4px;color:inherit;transition:border-color .15s,transform .15s,box-shadow .15s}
+.role-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 10px 24px -14px rgba(26,24,20,.45)}
+.role-card.org{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rc-ico{width:48px;height:48px;border-radius:12px;background:var(--ink);display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.role-card.org .rc-ico{background:var(--accent)}
+.rc-ico svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.role-card.org .rc-ico svg{stroke:#fff}
+.rc-d{font-family:var(--fm);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3)}
+.role-card.org .rc-d{color:rgba(255,255,255,.5)}
+.role-card b{font-size:20px;font-weight:800;letter-spacing:-.3px}
+.role-card ul{list-style:none;margin:10px 0 14px;display:flex;flex-direction:column;gap:7px}
+.role-card li{font-size:13px;line-height:1.4;padding-left:18px;position:relative;color:var(--ink2)}
+.role-card.org li{color:rgba(255,255,255,.78)}
+.role-card li::before{content:'';position:absolute;left:0;top:5px;width:8px;height:8px;border-radius:2px;background:var(--accent)}
+.role-card em{font-style:normal;margin-top:auto;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent)}
+.role-note{font-family:var(--fm);font-size:10px;letter-spacing:1px;color:var(--ink3);margin-top:8px}
+@media (max-width:600px){.role-cards{grid-template-columns:1fr;gap:10px}.role-title{font-size:23px}.role-card{padding:16px}.role-card ul{margin:6px 0 10px}.rc-ico{width:40px;height:40px;margin-bottom:6px}}
+/* ── ORGANIZER CONSOLE ───────────────── */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.kpi{background:var(--bg);border:1.5px solid var(--border);border-left:4px solid var(--border2);padding:9px 11px;border-radius:2px;min-width:0}
+.kpi b{font-size:22px;font-weight:800;display:block;line-height:1.2}
+.kpi small{font-size:9px;letter-spacing:1.3px;text-transform:uppercase;color:var(--ink3);font-weight:700;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kpi.r{border-left-color:var(--red)}.kpi.r b{color:var(--red)}
+.kpi.a{border-left-color:var(--amber)}.kpi.a b{color:var(--amber)}
+.kpi.g{border-left-color:var(--green)}
+.alerts{display:flex;flex-direction:column;gap:8px}
+.alert{background:rgba(196,33,10,.05);border:1.5px solid rgba(196,33,10,.3);border-left:4px solid var(--red);padding:10px 12px;border-radius:2px}
+.al-t{font-size:13px;font-weight:800;color:var(--red)}
+.al-s{font-size:11px;color:var(--ink2);margin-top:2px;line-height:1.45}
+.alert .row2{margin-top:8px}
+.alert .sbtn{padding:10px 6px}
+.al-ok{flex:1;font-size:11px;font-weight:700;color:var(--green);align-self:center}
+.okline{font-size:12px;color:var(--green);background:rgba(26,122,60,.07);border:1.5px solid rgba(26,122,60,.25);padding:10px 12px;border-radius:2px;line-height:1.45}
+.caps{display:flex;flex-direction:column;gap:1px}
+.cz{display:flex;align-items:center;gap:8px;background:none;border:none;padding:6px 4px;width:100%;text-align:left;color:inherit;font-size:12px;border-radius:2px}
+.cz:hover{background:var(--bg)}
+.cz-n{width:136px;flex:0 0 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cz-b{flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.cz-b i{display:block;height:100%;border-radius:4px;transition:width .6s}
+.cz-b i.g{background:#3aa365}.cz-b i.a{background:#e39a1c}.cz-b i.r{background:var(--red)}
+.cz-v{width:40px;text-align:right;font-family:var(--fm);font-size:11px;color:var(--ink2)}
+.tf{display:flex;flex-direction:column;gap:7px;background:#fff}
+.lbl2{font-size:11px;font-weight:700;color:var(--ink2);margin-top:4px}
+.ttypes{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tt{display:flex;align-items:center;gap:8px;padding:8px 9px;background:var(--bg);border:1.5px solid var(--border);border-radius:3px;font-size:12px;font-weight:600;text-align:left;color:var(--ink);min-height:44px;line-height:1.25}
+.tt span{font-size:18px;flex:0 0 auto}
+.tt.on{border-color:var(--accent);background:rgba(255,69,0,.07)}
+.frow{display:flex;gap:8px}
+.sel{flex:1;width:100%;min-width:0;background:#fff;border:1.5px solid var(--border2);padding:9px;font-size:14px;font-family:inherit;border-radius:2px;color:var(--ink);min-height:42px}
+.seg{display:flex;border:1.5px solid var(--border2);border-radius:3px;overflow:hidden}
+.seg button{flex:1;padding:9px 4px;background:#fff;border:none;border-right:1.5px solid var(--border2);font-size:12px;font-weight:700;color:var(--ink2);min-height:42px}
+.seg button:last-child{border-right:none}
+.seg button.on{background:var(--ink);color:#fff}.seg button.on.u{background:var(--red)}
+.btn.wide{width:100%;margin-top:6px}
+.lnk{background:none;border:none;color:var(--ink3);font-size:11px;text-decoration:underline;padding:2px;align-self:center}
+.tlist{display:flex;flex-direction:column;gap:8px}
+.tc{background:var(--bg);border:1.5px solid var(--border);border-left:4px solid var(--ink3);padding:10px;border-radius:2px;cursor:pointer}
+.tc.open{border-left-color:var(--red)}.tc.enroute{border-left-color:var(--amber)}.tc.working{border-left-color:#2b59c3}
+.tc.sel{background:#fff;border-color:var(--accent)}
+.tc-h{display:flex;gap:10px;align-items:flex-start}
+.tc-i{font-size:20px;line-height:1.1}
+.tc-t{flex:1;min-width:0}.tc-t b{font-size:13px;display:block}.tc-t small{font-size:11px;color:var(--ink3);line-height:1.4;display:block}
+.tc.urg .tc-t b{color:var(--red)}
+.tc-s{font-family:var(--fm);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 6px;border-radius:2px;background:var(--bg3);white-space:nowrap}
+.tc.open .tc-s{background:var(--red);color:#fff}.tc.enroute .tc-s{background:var(--amber);color:#fff}.tc.working .tc-s{background:#2b59c3;color:#fff}
+.tc-f{display:flex;gap:8px;margin-top:8px;align-items:center}
+.tc-f .sbtn.ghost{flex:0 0 auto;padding:9px 8px;border-color:transparent;color:var(--ink3)}
+.tc-w{flex:1;font-size:12px;display:flex;align-items:center;gap:6px;min-width:0}
+.tw,.rb{width:22px;height:22px;border-radius:5px;background:var(--c);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:0 0 auto;font-family:var(--fd)}
+.tdone{font-size:12px;padding:7px 2px;border-bottom:1px solid var(--border);color:var(--ink2)}
+.tdone small{display:block;font-size:10px;color:var(--ink3);font-family:var(--fm);margin-top:1px}
+.rsums{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.rsum{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--border);padding:8px;border-radius:2px;min-width:0}
+.rs-i{flex:1;min-width:0;display:flex;flex-direction:column}.rsum b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rsum small{font-family:var(--fm);font-size:10px;color:var(--ink3);white-space:nowrap}
+.sc{display:flex;gap:10px;align-items:center;background:var(--bg);border:1.5px solid var(--border);padding:9px 10px;border-radius:2px;width:100%;text-align:left;color:inherit}
+.sc:hover{background:#fff}.sc.sel{border-color:var(--accent);background:#fff}
+.sc .rb{width:30px;height:30px;font-size:15px;border-radius:7px}
+.sc-i{flex:1;min-width:0}.sc-i b{font-size:13px;display:block}.sc-i em{font-style:normal;font-weight:500;color:var(--ink3);font-size:11px;margin-left:4px}
+.sc-i small{font-size:11px;display:block;color:var(--green);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sc-i small.enroute{color:var(--amber)}.sc-i small.working{color:#2b59c3}
+.tpls{display:flex;flex-direction:column;gap:5px}
+.tpl{text-align:left;background:var(--bg);border:1.5px solid var(--border);padding:8px 10px;font-size:12px;border-radius:3px;color:var(--ink);line-height:1.35}
+.tpl:hover{border-color:var(--accent)}
+.ta{min-height:66px;resize:vertical;font-family:inherit;margin:4px 0 0}
+.mh1{background:var(--bg);border:1.5px solid var(--border);border-left:4px solid var(--accent);padding:9px 11px;font-size:13px;border-radius:2px;line-height:1.4}
+.mh1 small{display:block;font-family:var(--fm);font-size:10px;color:var(--ink3);margin-top:3px}
+.lays{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap}
+.lay{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 9px;border:1.5px solid var(--border2);background:#fff;color:var(--ink3);border-radius:12px}
+.lay.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.mk.staff{z-index:25}
+.sf-b{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:7px;background:var(--c);color:#fff;border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;box-shadow:0 2px 6px rgba(0,0,0,.4);cursor:pointer;transition:transform .2s}
+.mk.staff .mk-nm{top:16px;font-size:9px}
+.mk.staff.busy .sf-b::after{content:'';position:absolute;inset:-7px;border-radius:11px;border:2px solid var(--c);animation:ring 1.6s ease-out infinite}
+.mk.staff.sel .sf-b{transform:scale(1.25)}
+.mk.task{z-index:28;--tc:var(--ink3)}
+.mk.task[data-st=open]{--tc:var(--red)}.mk.task[data-st=enroute]{--tc:var(--amber)}.mk.task[data-st=working]{--tc:#2b59c3}
+.tk-p{position:absolute;left:-16px;top:-16px;width:32px;height:32px;border-radius:50%;background:#fff;border:3px solid var(--tc);display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer;transition:transform .2s}
+.tk-p::before{content:'';position:absolute;left:50%;bottom:-9px;margin-left:-5px;border:5px solid transparent;border-top:6px solid var(--tc)}
+.mk.task[data-st=open] .tk-p::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:2.5px solid var(--red);animation:ring 1.3s ease-out infinite}
+.mk.task.sel .tk-p{transform:scale(1.2)}
+@media (max-width:820px){#legend:has(.lays) b,#legend:has(.lays) .row{display:none}#legend:has(.lays) .bar{margin:2px 0 0}.legend{padding:6px 8px}.lay{font-size:9px;padding:4px 7px}.lays{margin-bottom:4px}}
+@media (max-width:420px){.pill span:last-child{display:none}#hdr{gap:7px}#role-sw{padding:7px 8px}}
 </style>
 </head>
 <body>
@@ -334,6 +441,31 @@ select.lang option{color:#000}
   </div>
 </div>
 
+<!-- ROLE PICKER (demo) -->
+<div class="screen" id="role">
+  <div class="lang-fix"><select class="lang" aria-label="Language" data-lang></select></div>
+  <div class="role-wrap">
+    <div class="card-word">Find Y Crew · Demo</div>
+    <div class="role-title" data-i="role_t"></div>
+    <div class="role-sub" data-i="role_s"></div>
+    <div class="role-cards">
+      <button class="role-card" data-role="fan">
+        <div class="rc-ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.6 2.5-6 5.5-6s5.5 2.4 5.5 6"/><circle cx="17.5" cy="9.5" r="2.4"/><path d="M15.5 14.4c2.4.3 4.5 2.4 4.5 5.6"/></svg></div>
+        <span class="rc-d" data-i="role_fan_d"></span><b data-i="role_fan"></b>
+        <ul><li data-i="role_fan_1"></li><li data-i="role_fan_2"></li><li data-i="role_fan_3"></li></ul>
+        <em data-i="role_go"></em>
+      </button>
+      <button class="role-card org" data-role="org">
+        <div class="rc-ico"><svg viewBox="0 0 24 24"><rect x="4" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="16" y="3" width="4" height="17"/></svg></div>
+        <span class="rc-d" data-i="role_org_d"></span><b data-i="role_org"></b>
+        <ul><li data-i="role_org_1"></li><li data-i="role_org_2"></li><li data-i="role_org_3"></li></ul>
+        <em data-i="role_go"></em>
+      </button>
+    </div>
+    <div class="role-note" data-i="role_note"></div>
+  </div>
+</div>
+
 <!-- GPS ERROR -->
 <div class="screen" id="gps">
   <h2 id="gps-t"></h2><p id="gps-b"></p><ul id="gps-l"></ul>
@@ -349,6 +481,7 @@ select.lang option{color:#000}
     <a class="logo" href="../" id="logo" title="Find Y Crew">Find <span>Y</span> Crew</a>
     <div class="pill"><span class="dot" id="dot"></span><span id="conn"></span></div>
     <button class="hbtn" id="share-btn" aria-label="Share"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM20 14v0M17 20h4M20 17v3"/></svg><span class="hide-s" data-i="share"></span></button>
+    <button class="hbtn hide" id="role-sw"><svg viewBox="0 0 24 24"><path d="M7 7h12l-3-3M17 17H5l3 3"/></svg><span></span></button>
     <select class="lang" aria-label="Language" data-lang></select>
   </header>
   <div id="body">
@@ -542,6 +675,8 @@ const SB_URL='https://jootvxinokfwffkdhony.supabase.co';
 const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impvb3R2eGlub2tmd2Zma2Rob255Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNDEyMTcsImV4cCI6MjA5MDkxNzIxN30.gJ7aDKudwWNb_WDsMUB8l375CmbD_C3O_-_EUCRmMbo';          // public "anon" key (safe by design; real protection = RLS, see /supabase)
 const Q=new URLSearchParams(location.search);
 const DEMO=Q.has('demo');
+let ROLE=['fan','org'].includes(Q.get('role'))?Q.get('role'):'';
+const orgMode=()=>DEMO&&ROLE==='org';
 // The venue map is an illustration georeferenced by a centre point + real-world width.
 // For a field test anywhere: open the app with ?at=LAT,LNG and the map is centred there.
 const MAP={url:'../assets/festival-map.jpg',w:1180,h:550,widthM:700,center:[28.1235,-15.4363]};
@@ -691,12 +826,14 @@ function setConn(state){
   lab.textContent=t(state==='live'?'live':state==='demo'?'demo':state==='err'?'offline':'connecting');
 }
 function onMarkerTap(id){
+  if(orgMode()){orgMarkerTap(id);return;}
   if(id==='me'){centerOnMe();return;}
   const code=id.startsWith('meet_')?id.slice(5):id;
   if(code==='me'){if(S.meet)flyTo(S.meet.x,S.meet.y,Math.max(V.s,1));return;}
   selectFriend(code,true);
 }
 function onMapTap(w){
+  if(orgMode()){orgMapTap(w);return;}
   if(S.pick){S.pick=false;vp.classList.remove('pick');setMeet(w.x,w.y);return;}
   if(DEMO&&demo.on&&S.tab!=='org'){demo.target=w;ripple(w.x,w.y);}
 }
@@ -829,7 +966,7 @@ class Walker{
   step(dt){
     if(this.hold) return;
     if(this.wait>0){this.wait-=dt;if(this.wait<=0)this.at=null;return;}
-    if(!this.tp)this.go(pickPoi(demo.hour));
+    if(!this.tp)this.go(this.pick?this.pick():pickPoi(demo.hour));
     if(this.arrived){ if(this.moveTo(this.tp.x+this.off[0],this.tp.y+this.off[1],dt)){this.at=this.tp.id;this.wait=this.role==='crowd'?rnd(15,70):rnd(8,20);this.tp=null;} return; }
     if(this.node===this.tp.node){this.arrived=true;return;}
     if(this.next===null){const nb=G.adj[this.node];let best=nb[0],bd=1e9;for(const n of nb){const d=this.dist[n]+Math.random()*.4;if(d<bd){bd=d;best=n;}}this.next=best;}
@@ -859,9 +996,10 @@ function demoTick(){
   for(const w of demo.walkers){ w.step(1); const f=F[w.bot.code]; if(!w.hold){f.x=w.x;f.y=w.y;f.seen=Date.now();} f.at=w.hold?null:w.at; }
   for(const w of demo.crowd) w.step(1);
   if(demo.target&&S.pos){ const dx=demo.target.x-S.pos.x,dy=demo.target.y-S.pos.y,d=Math.hypot(dx,dy),s=46; if(d<=s){setDemoPos(demo.target.x,demo.target.y);demo.target=null;}else setDemoPos(S.pos.x+dx/d*s,S.pos.y+dy/d*s); }
+  if(orgMode()){ orgTick(); if(demo.tick%2===0) updateHeat(); return; }
   if(demo.tick===12){const p=POI_BY.main,f=F.WOLF88;f.meet={x:p.x,y:p.y-14};toast(t('bot_meet',{n:'WOLF'}),'','g',3500);}
+  if(demo.tick===40) toast(t('fan_push'),t('fan_push_b'),'',5000);
   renderMe(); renderFriendsWorld(); if(demo.tick%3===0&&S.tab==='crew') renderFriendList();
-  if(demo.tick%2===0) updateHeat();
 }
 function demoStart(){
   demo.on=true; setConn('demo'); world.style.setProperty('--mv','1000ms'); demoInit(); demoTick(); renderFriendList(); demo.timer=setInterval(demoTick,1000);
@@ -875,7 +1013,7 @@ function crowdStats(){
 }
 let heatMax=1;
 function updateHeat(){
-  if(S.tab!=='org') return;
+  if(!orgMode()) return;
   const{grid,zones}=crowdStats(),c=$('#heat'),g=c.getContext('2d'),k=c.width/MAP.w; g.clearRect(0,0,c.width,c.height);
   let mx=1; for(const v of grid) if(v>=K_MIN&&v>mx) mx=v; heatMax=mx;
   for(let y=0;y<CH;y++)for(let x=0;x<CW;x++){
@@ -884,7 +1022,7 @@ function updateHeat(){
     const col=tt<.34?'255,214,64':tt<.67?'255,96,48':'190,20,90', gr=g.createRadialGradient(cx,cy,0,cx,cy,r);
     gr.addColorStop(0,`rgba(${col},${.38+.5*tt})`); gr.addColorStop(1,`rgba(${col},0)`); g.fillStyle=gr; g.beginPath(); g.arc(cx,cy,r,0,6.3); g.fill();
   }
-  renderOrgStats(zones);
+  orgStats(zones);
 }
 function setHour(h){
   demo.hour=h; for(const w of demo.crowd){ if(Math.random()<.4){w.wait=0;w.at=null;w.go(pickPoi(h));w.arrived=false;} }
@@ -900,8 +1038,8 @@ const ICON={
 };
 const isMobile=()=>matchMedia('(max-width:820px)').matches;
 function buildTabs(){
-  const ks=DEMO?['crew','status','map','me','org']:['crew','status','map','me'];
-  $('#tabs').innerHTML=ks.map(k=>`<button class="tab" data-tab="${k}">${ICON[k]}<span>${esc(t('tab_'+k))}</span></button>`).join('');
+  const om=orgMode(), ks=om?ORG_TABS:['crew','status','map','me'];
+  $('#tabs').innerHTML=ks.map(k=>`<button class="tab" data-tab="${k}">${ICON[k]}<span>${esc(t((om?'otab_':'tab_')+k))}</span></button>`).join('');
 }
 $('#tabs').addEventListener('click',e=>{
   const b=e.target.closest('.tab'); if(!b) return; const k=b.dataset.tab;
@@ -909,12 +1047,11 @@ $('#tabs').addEventListener('click',e=>{
   setTab(k);
 });
 function setTab(k){
-  S.tab=k; $('#side').classList.remove('collapsed');
+  const om=orgMode(); S.tab=k; if(om) ORG.tab=k; $('#side').classList.remove('collapsed');
   $$('#tabs .tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===k));
-  world.classList.toggle('org',k==='org'); vp.classList.toggle('org',k==='org'); $('#heat').classList.toggle('on',k==='org');
-  const lg=$('#legend'); lg.classList.toggle('hide',k!=='org');
-  if(k==='org') lg.innerHTML=`<b>${esc(t('org_leg'))}</b><div class="bar"></div><div class="row"><span>${esc(t('leg_lo'))}</span><span>≥${K_MIN}</span><span>${esc(t('leg_hi'))}</span></div>`;
-  renderPanel(); if(k==='org'&&demo.on) updateHeat();
+  world.classList.toggle('org',om); vp.classList.toggle('org',om); $('#heat').classList.toggle('on',om&&ORG.layers.heat);
+  if(om) orgLegend(); else $('#legend').classList.add('hide');
+  renderPanel(); if(om&&demo.on) updateHeat();
   if(S.started){requestAnimationFrame(()=>{vMeasure();vApply();});}
 }
 const avBox=(c,a,sz)=>`<div class="${sz||'me-av'}" style="border-color:${esc(c)};background:${esc(c)}22">${esc(a)}</div>`;
@@ -935,6 +1072,7 @@ function renderFriendList(){
   }).join('');
 }
 function renderPanel(){
+  if(orgMode()){orgPanel(S.tab);return;}
   const p=$('#panel'),k=S.tab; let h='';
   if(k==='crew'){
     h=`<div class="box me-box">${avBox(S.color,S.avatar)}<div class="me-nm" style="color:${esc(S.color)}">${esc(S.name)}</div>
@@ -961,20 +1099,10 @@ function renderPanel(){
       <div class="sl">${esc(t('data_h'))}</div><div class="note">${esc(t(DEMO?'data_demo':'data_live'))}</div>`
       +(DEMO?`<a class="sbtn p" style="text-align:center;text-decoration:none" href="?lang=${LANG}">${esc(t('open_real'))}</a>`:`<button class="sbtn danger" data-act="reset">${esc(t('reset'))}</button>`)
       +`<a class="sbtn" style="text-align:center;text-decoration:none" href="../?lang=${LANG}">${esc(t('back_web'))}</a>`;
-  } else if(k==='org'){
-    const hr=demo.hour; h=`<div class="sl">${esc(t('org_h'))}</div><div class="note">${esc(t('org_sub'))}</div>
-      <div class="stat"><div class="box"><b id="o-total">${demo.crowd.length}</b><small>${esc(t('org_total'))}</small></div><div class="box"><b id="o-peak" style="font-size:14px;line-height:1.6">—</b><small>${esc(t('org_peak'))}</small></div></div>
-      <div class="sl">${esc(t('org_time'))}</div><div class="sim"><button class="sbtn" style="flex:0 0 112px" data-act="play" id="o-play">${esc(t(demo.play?'org_pause':'org_play'))}</button><input type="range" id="o-hour" min="17" max="25" step="0.5" value="${hr}"><output id="o-out">${fmtHour(hr)}</output></div>
-      <div class="sl">${esc(t('org_zones'))}</div><div class="rank" id="o-rank"></div><div class="hint">${esc(t('org_k',{k:K_MIN}))}</div>`;
   }
   p.innerHTML=h; if(k==='crew') renderFriendList(); if(k==='org') updateHeat(); p.scrollTop=0;
 }
 const fmtHour=h=>String(Math.floor(h)%24).padStart(2,'0')+':'+(h%1?'30':'00');
-function renderOrgStats(zones){
-  const pk=$('#o-peak'); if(!pk) return; pk.textContent=t('z_'+zones[0].id)+' · '+zones[0].n;
-  const mx=Math.max(1,zones[0].n); $('#o-rank').innerHTML=zones.map(z=>{const low=z.n<K_MIN;
-    return `<div class="rk${low?' low':''}"><span class="rn">${esc(t('z_'+z.id))}</span><span class="rb"><i style="width:${low?0:Math.round(z.n/mx*100)}%"></i></span><span class="rv">${low?'<'+K_MIN:z.n}</span></div>`;}).join('');
-}
 $('#panel').addEventListener('click',async e=>{
   const b=e.target.closest('[data-act]'); if(!b) return; const a=b.dataset.act;
   if(a==='sel'){selectFriend(b.dataset.code,true);}
@@ -993,8 +1121,12 @@ $('#panel').addEventListener('click',async e=>{
   else if(a==='tgexact'){S.exact=!S.exact;saveProfile();if(!DEMO)liveTick();renderPanel();}
   else if(a==='reset'){confirmBox(t('reset_q'),t('reset_b'),t('yes_del'),()=>{removeRow();S.started=false;store.del(PKEY);location.href=location.pathname+'?lang='+LANG;});}
   else if(a==='play'){togglePlay();}
+  else if(orgMode()) orgAct(a,b);
 });
 $('#panel').addEventListener('input',e=>{ if(e.target.id==='o-hour'){const h=+e.target.value;$('#o-out').textContent=fmtHour(h);setHour(h);} });
+$('#panel').addEventListener('change',e=>{ const id=e.target.id;
+  if(id==='f-zone') ORG.form.zone=e.target.value;
+  else if(id==='m-zone'){ORG.msg.zone=e.target.value;ORG.msg.text=$('#m-text').value;orgPanel('msg');} });
 $('#panel').addEventListener('keydown',e=>{ if(e.key==='Enter'&&e.target.id==='add-in'){e.preventDefault();$('#panel [data-act=add]').click();} });
 function togglePlay(){
   demo.play=!demo.play; clearInterval(demo.playTimer);
@@ -1009,7 +1141,7 @@ function confirmBox(title,body,yes,cb){
 /* ── share / QR ── */
 function shareUrl(){
   const u=new URL(location.href); u.hash=''; u.search='';
-  if(DEMO){u.searchParams.set('demo','1');} else {u.searchParams.set('add',S.code); if(Q.get('at')) u.searchParams.set('at',Q.get('at'));}
+  if(DEMO){u.searchParams.set('demo','1'); if(ROLE) u.searchParams.set('role',ROLE);} else {u.searchParams.set('add',S.code); if(Q.get('at')) u.searchParams.set('at',Q.get('at'));}
   u.searchParams.set('lang',LANG); return u.toString();
 }
 function copyText(s){
@@ -1066,7 +1198,7 @@ function showReturning(p){
   $('#ret-btn').onclick=()=>{Object.assign(S,{name:p.name,code:p.code,color:p.color,avatar:p.avatar,friends:p.friends,visible:p.visible,exact:p.exact});enterApp();};
 }
 $('#gps-retry').onclick=()=>{$('#gps').classList.remove('show');location.reload();};
-$('#gps-demo').onclick=()=>{location.search='?demo=1&lang='+LANG;};
+$('#gps-demo').onclick=()=>{location.search='?demo=1&role=fan&lang='+LANG;};
 
 /* ═══════════════ LANGUAGE ═══════════════ */
 function applyI18n(){
@@ -1082,7 +1214,7 @@ function fillLang(){
 }
 function setLang(l){
   LANG=l; try{localStorage.setItem('fyc4_lang',l);}catch(e){} $$('select[data-lang]').forEach(s=>s.value=l); applyI18n();
-  if(S.started){buildTabs();setTab(S.tab);renderMe();renderFriendsWorld();renderMeet();setConn(DEMO?'demo':NET.fails>=2?'err':NET.okOnce?'live':'connecting');
+  if(S.started){buildTabs();setTab(S.tab);roleBtn();if(!orgMode())renderMe();renderFriendsWorld();renderMeet();setConn(DEMO?'demo':NET.fails>=2?'err':NET.okOnce?'live':'connecting');
     $('#chip').innerHTML='';}
 }
 
@@ -1096,23 +1228,31 @@ function loadMap(){
 }
 async function enterApp(){
   $$('.screen').forEach(s=>s.classList.remove('show')); $('#app').classList.add('show');
-  S.started=true; buildTabs(); setTab('crew'); if(isMobile()) $('#side').classList.add('collapsed');
+  S.started=true; buildTabs(); setTab(orgMode()?'live':'crew'); roleBtn(); if(isMobile()&&!orgMode()) $('#side').classList.add('collapsed');
   setConn(DEMO?'demo':'connecting'); world.style.setProperty('--mv',(DEMO?1000:LIVE_MS+400)+'ms');
   vMeasure(); vApply();
   const L=$('#loading'); L.classList.remove('out'); $('#load-retry').classList.add('hide'); $('#load-t').textContent=t('loading_map');
   try{ await loadMap(); }
   catch(e){ $('#load-t').textContent=t('load_err'); const b=$('#load-retry'); b.classList.remove('hide'); b.onclick=()=>enterApp(); return; }
   V.ready=true; vMeasure(); startView(MAP.w/2,MAP.h/2); L.classList.add('out');
-  if(DEMO){ demoStart(); startView(S.pos.x,S.pos.y); showDemoBanner(); }
+  if(DEMO){ demoStart(); if(orgMode()){ orgStart(); vMeasure(); if(isMobile()){ V.s=clamp(V.vw/MAP.w*1.45,V.minS,V.maxS); const c=clampT(V.vw/2-MAP.w*.6*V.s,V.vh/2-MAP.h*.5*V.s,V.s); V.tx=c.tx; V.ty=c.ty; vApply(); } else { V.s=V.minS; vApply(); } } else startView(S.pos.x,S.pos.y); showDemoBanner(); }
   else { renderMe(); renderMeet(); renderFriendsWorld(); startGPS(); liveTick(); }
   if(!DEMO) toast(t('welcome'),t('welcome_b'),'g',2600);
   setInterval(()=>{if(S.status&&Date.now()>=S.statusExp){S.status='';S.statusExp=0;renderMe();if(S.tab==='status')renderPanel();}},10000);
   const add=Q.get('add'); if(add&&!DEMO){ const r=await addFriend(add); if(r&&r!=='err_dup') toast(t(r),'','a',3500); history.replaceState(null,'',location.pathname+'?lang='+LANG); }
 }
+function roleBtn(){
+  const b=$('#role-sw'); b.classList.toggle('hide',!DEMO); if(!DEMO) return;
+  $('span',b).textContent=t(ROLE==='org'?'sw_fan':'sw_org'); b.title=t('sw_title');
+  b.onclick=()=>{location.search='?demo=1&role='+(ROLE==='org'?'fan':'org')+'&lang='+LANG;};
+}
+$('#role').addEventListener('click',e=>{const c=e.target.closest('[data-role]'); if(!c) return;
+  ROLE=c.dataset.role; history.replaceState(null,'',location.pathname+'?demo=1&role='+ROLE+'&lang='+LANG);
+  $('#role').classList.remove('show'); enterApp();});
 function showDemoBanner(){
   const c=$('#chip'); c.innerHTML=''; const b=document.createElement('div'); b.className='banner';
-  b.innerHTML='<div><span></span><small></small></div><button class="x" aria-label="Close">✕</button>'; $('span',b).textContent=t('demo_b'); $('small',b).textContent=t('demo_tip'); $('button',b).onclick=()=>b.remove(); c.appendChild(b);
-  setTimeout(()=>b.remove(),14000);
+  b.innerHTML='<div><span></span><small></small></div><button class="x" aria-label="Close">✕</button>'; $('span',b).textContent=t('demo_b'); $('small',b).textContent=t(orgMode()?'org_sub':'demo_tip'); $('button',b).onclick=()=>b.remove(); c.appendChild(b);
+  setTimeout(()=>b.remove(),orgMode()?7000:14000);
 }
 
 /* ═══════════════ BOOT ═══════════════ */
@@ -1120,10 +1260,312 @@ function boot(){
   LANG=pickLang(); fillLang(); applyI18n(); if(DEMO) document.title='Find Y Crew · Demo';
   let done=false; const spl=$('#splash');
   const go=()=>{ if(done) return; done=true; spl.classList.add('out'); setTimeout(()=>spl.remove(),550);
-    if(DEMO){ Object.assign(S,{name:t('you'),code:genCode(),color:'#4466ff',avatar:'🙂'}); enterApp(); return; }
+    if(DEMO){ Object.assign(S,{name:t('you'),code:genCode(),color:'#4466ff',avatar:'🙂'}); if(ROLE) enterApp(); else $('#role').classList.add('show'); return; }
     const p=loadProfile(); if(p){ $('#setup').classList.add('show'); suRender(); showReturning(p); } else { $('#onboard').classList.add('show'); buildOb(); } };
   setTimeout(go,1500); spl.addEventListener('click',go);
 }
+/* ═══════════════ ORGANIZER CONSOLE (demo, role=org) ═══════════════
+   Everything here is simulated in the browser. Attendees are only ever shown as
+   aggregated density (cells under K_MIN people are never drawn). Staff positions are
+   shown individually because staff share them on shift, under their work agreement. */
+Object.assign(TR.es,{
+ role_t:'¿Cómo quieres ver la demo?', role_s:'Elige un punto de vista. Puedes cambiarlo cuando quieras.',
+ role_fan:'Voy al festival', role_fan_d:'La app del asistente', role_fan_1:'Tu crew en el mapa, en vivo', role_fan_2:'Estados y puntos de encuentro', role_fan_3:'Solo te ve quien tú eliges',
+ role_org:'Organizo el festival', role_org_d:'El panel del organizador', role_org_1:'Mapa de calor y aforo por zona', role_org_2:'Tareas al staff más cercano', role_org_3:'Avisos a los asistentes por zona',
+ role_go:'Entrar →', role_note:'Festival simulado. No se usa tu ubicación ni se guarda nada.',
+ sw_fan:'Asistente', sw_org:'Organizador', sw_title:'Cambiar de vista',
+ otab_live:'En vivo', otab_tasks:'Tareas', otab_team:'Equipo', otab_msg:'Avisos',
+ o_now:'Asistentes', o_busiest:'Zona más llena', o_open:'Incidencias abiertas', o_resp:'Respuesta media',
+ o_alerts:'Alertas', o_ok:'Todo en orden: ninguna zona supera el 90 % de su aforo.',
+ o_alert:'{z} al {p} % de aforo', o_alert_sub:'Sugerencia: enviar seguridad y avisar a quien está en la zona.',
+ o_send_sec:'Enviar seguridad', o_notify:'Avisar a la zona', o_on_way:'Seguridad en camino',
+ o_cap_h:'Aforo por zona', o_cap_hint:'Toca una zona para centrarla en el mapa.', o_time:'Hora simulada',
+ o_priv:'Los asistentes nunca aparecen de forma individual: solo densidad agregada (mín. {k} personas por zona). No se guardan trayectorias.',
+ leg_heat:'Densidad de público', lay_heat:'Calor', lay_staff:'Equipo', lay_tasks:'Incidencias',
+ t_new:'Nueva tarea', t_type:'¿Qué pasa?', t_zone:'¿Dónde?', t_onmap:'📍 Mapa', t_prio:'Prioridad', t_normal:'Normal', t_urgent:'Urgente',
+ t_create_assign:'Crear y asignar al más cercano', t_create:'Crear sin asignar', t_active:'Abiertas', t_none:'No hay tareas abiertas.', t_done_h:'Resueltas ({n})',
+ tt_crowd:'Control de aforo', tt_med:'Atención sanitaria', tt_clean:'Limpieza', tt_lost:'Objeto o persona perdida', tt_supply:'Reponer agua / barra',
+ ts_open:'Sin asignar', ts_enroute:'En camino', ts_working:'Atendiendo', ts_done:'Resuelta',
+ t_assign:'Asignar al más cercano', t_cancel:'Cancelar', t_eta:'≈ {m} min · {d} m', t_here:'ya en la zona', t_took:'respuesta ≈ {m} min',
+ t_pick_tap:'Toca el mapa para elegir la zona', t_zone_set:'Zona: {z}', t_assigned:'{n} va de camino', t_created:'Tarea creada sin asignar',
+ t_nofree:'No hay nadie libre de {r}', t_completed:'✓ {t} · {z}', t_completed_b:'Resuelta por {n}',
+ inc_new:'Nueva incidencia', inc_med:'Un asistente pide ayuda desde la app', inc_lost:'Niño buscando a sus padres en el punto de info',
+ r_sec:'Seguridad', r_med:'Sanitario', r_clean:'Limpieza', r_info:'Información',
+ tm_h:'Equipo en turno', tm_free:'Libres: {n}', tm_s_free:'Libre · {z}', tm_s_enroute:'En camino a {z}', tm_s_working:'Atendiendo en {z}',
+ tm_priv:'El staff comparte su ubicación solo durante su turno y con consentimiento. Fuera de turno desaparece del mapa.',
+ m_h:'Enviar aviso', m_to:'Destinatarios', m_all:'Todo el recinto', m_zone:'Una zona', m_staff:'Solo equipo', m_tpl:'Plantillas rápidas', m_ph:'Escribe el aviso…',
+ m_send:'Enviar aviso', m_sent:'Aviso enviado', m_reach:'≈ {n} personas', m_hist:'Enviados', m_none:'Aún no has enviado avisos.', m_empty:'Escribe un mensaje primero',
+ m_t1:'{z}: el concierto empieza 15 min tarde', m_t2:'{z} está llena. Usa los accesos alternativos', m_t3:'Agua gratis en el punto de información', m_t4:'Tormenta en 30 min: busca refugio en las carpas',
+ m_note:'Llega como notificación a quien tiene la app abierta y ha aceptado los avisos del festival.',
+ fan_push:'📣 Aviso del festival', fan_push_b:'Escenario Este: el concierto empieza 15 min tarde'
+});
+Object.assign(TR.en,{
+ role_t:'How do you want to see the demo?', role_s:'Pick a point of view. You can switch at any time.',
+ role_fan:"I'm going to the festival", role_fan_d:'The attendee app', role_fan_1:'Your crew on a live map', role_fan_2:'Statuses and meeting points', role_fan_3:'Only people you choose can see you',
+ role_org:'I run the festival', role_org_d:'The organizer console', role_org_1:'Heatmap and capacity by zone', role_org_2:'Tasks sent to the nearest staff', role_org_3:'Messages to attendees by zone',
+ role_go:'Enter →', role_note:'Simulated festival. Your location is not used and nothing is stored.',
+ sw_fan:'Attendee', sw_org:'Organizer', sw_title:'Switch view',
+ otab_live:'Live', otab_tasks:'Tasks', otab_team:'Team', otab_msg:'Messages',
+ o_now:'Attendees', o_busiest:'Busiest zone', o_open:'Open incidents', o_resp:'Avg. response',
+ o_alerts:'Alerts', o_ok:'All good: no zone is above 90% of capacity.',
+ o_alert:'{z} at {p}% capacity', o_alert_sub:'Suggestion: send security and notify people in the zone.',
+ o_send_sec:'Send security', o_notify:'Notify zone', o_on_way:'Security on the way',
+ o_cap_h:'Capacity by zone', o_cap_hint:'Tap a zone to centre it on the map.', o_time:'Simulated time',
+ o_priv:'Attendees never appear individually: aggregated density only (min. {k} people per zone). No trails are stored.',
+ leg_heat:'Crowd density', lay_heat:'Heat', lay_staff:'Team', lay_tasks:'Incidents',
+ t_new:'New task', t_type:"What's happening?", t_zone:'Where?', t_onmap:'📍 Map', t_prio:'Priority', t_normal:'Normal', t_urgent:'Urgent',
+ t_create_assign:'Create & assign nearest', t_create:'Create unassigned', t_active:'Open', t_none:'No open tasks.', t_done_h:'Resolved ({n})',
+ tt_crowd:'Crowd control', tt_med:'Medical assistance', tt_clean:'Cleaning', tt_lost:'Lost item or person', tt_supply:'Restock water / bar',
+ ts_open:'Unassigned', ts_enroute:'On the way', ts_working:'On site', ts_done:'Resolved',
+ t_assign:'Assign nearest', t_cancel:'Cancel', t_eta:'≈ {m} min · {d} m', t_here:'already there', t_took:'response ≈ {m} min',
+ t_pick_tap:'Tap the map to pick the zone', t_zone_set:'Zone: {z}', t_assigned:'{n} is on the way', t_created:'Task created, unassigned',
+ t_nofree:'No {r} staff available', t_completed:'✓ {t} · {z}', t_completed_b:'Resolved by {n}',
+ inc_new:'New incident', inc_med:'An attendee asks for help from the app', inc_lost:'Child looking for parents at the info point',
+ r_sec:'Security', r_med:'Medical', r_clean:'Cleaning', r_info:'Information',
+ tm_h:'Team on shift', tm_free:'Free: {n}', tm_s_free:'Free · {z}', tm_s_enroute:'Heading to {z}', tm_s_working:'On site at {z}',
+ tm_priv:'Staff share their location only during their shift and with consent. Off shift, they disappear from the map.',
+ m_h:'Send message', m_to:'Recipients', m_all:'Whole venue', m_zone:'One zone', m_staff:'Team only', m_tpl:'Quick templates', m_ph:'Write the message…',
+ m_send:'Send message', m_sent:'Message sent', m_reach:'≈ {n} people', m_hist:'Sent', m_none:"You haven't sent any messages yet.", m_empty:'Write a message first',
+ m_t1:'{z}: the show starts 15 min late', m_t2:'{z} is full. Please use the alternative entrances', m_t3:'Free water at the info point', m_t4:'Storm in 30 min: take shelter in the tents',
+ m_note:'Delivered as a notification to people with the app open who accepted festival messages.',
+ fan_push:'📣 Festival alert', fan_push_b:'East Stage: the show starts 15 min late'
+});
+Object.assign(TR.da,{
+ role_t:'Hvordan vil du se demoen?', role_s:'Vælg et perspektiv. Du kan skifte når som helst.',
+ role_fan:'Jeg skal på festival', role_fan_d:'Deltager-appen', role_fan_1:'Din crew på et live-kort', role_fan_2:'Statusser og mødesteder', role_fan_3:'Kun dem du vælger, kan se dig',
+ role_org:'Jeg arrangerer festivalen', role_org_d:'Arrangørpanelet', role_org_1:'Varmekort og kapacitet pr. område', role_org_2:'Opgaver til nærmeste personale', role_org_3:'Beskeder til gæster pr. område',
+ role_go:'Gå ind →', role_note:'Simuleret festival. Din lokation bruges ikke, og intet gemmes.',
+ sw_fan:'Deltager', sw_org:'Arrangør', sw_title:'Skift visning',
+ otab_live:'Live', otab_tasks:'Opgaver', otab_team:'Team', otab_msg:'Beskeder',
+ o_now:'Deltagere', o_busiest:'Travleste område', o_open:'Åbne hændelser', o_resp:'Gns. responstid',
+ o_alerts:'Advarsler', o_ok:'Alt i orden: intet område er over 90 % af kapaciteten.',
+ o_alert:'{z} på {p} % kapacitet', o_alert_sub:'Forslag: send sikkerhed og giv besked til folk i området.',
+ o_send_sec:'Send sikkerhed', o_notify:'Giv området besked', o_on_way:'Sikkerhed på vej',
+ o_cap_h:'Kapacitet pr. område', o_cap_hint:'Tryk på et område for at centrere det på kortet.', o_time:'Simuleret tid',
+ o_priv:'Gæster vises aldrig enkeltvis: kun aggregeret tæthed (min. {k} personer pr. område). Ingen spor gemmes.',
+ leg_heat:'Publikumstæthed', lay_heat:'Varme', lay_staff:'Team', lay_tasks:'Hændelser',
+ t_new:'Ny opgave', t_type:'Hvad sker der?', t_zone:'Hvor?', t_onmap:'📍 Kort', t_prio:'Prioritet', t_normal:'Normal', t_urgent:'Haster',
+ t_create_assign:'Opret og tildel nærmeste', t_create:'Opret uden tildeling', t_active:'Åbne', t_none:'Ingen åbne opgaver.', t_done_h:'Løst ({n})',
+ tt_crowd:'Kapacitetskontrol', tt_med:'Førstehjælp', tt_clean:'Rengøring', tt_lost:'Mistet genstand eller person', tt_supply:'Genopfyld vand / bar',
+ ts_open:'Ikke tildelt', ts_enroute:'På vej', ts_working:'På stedet', ts_done:'Løst',
+ t_assign:'Tildel nærmeste', t_cancel:'Annullér', t_eta:'≈ {m} min · {d} m', t_here:'allerede der', t_took:'responstid ≈ {m} min',
+ t_pick_tap:'Tryk på kortet for at vælge område', t_zone_set:'Område: {z}', t_assigned:'{n} er på vej', t_created:'Opgave oprettet uden tildeling',
+ t_nofree:'Intet ledigt personale fra {r}', t_completed:'✓ {t} · {z}', t_completed_b:'Løst af {n}',
+ inc_new:'Ny hændelse', inc_med:'En gæst beder om hjælp via appen', inc_lost:'Barn leder efter forældre ved infopunktet',
+ r_sec:'Sikkerhed', r_med:'Sanitet', r_clean:'Rengøring', r_info:'Information',
+ tm_h:'Team på vagt', tm_free:'Ledige: {n}', tm_s_free:'Ledig · {z}', tm_s_enroute:'På vej til {z}', tm_s_working:'På stedet ved {z}',
+ tm_priv:'Personalet deler kun lokation under vagten og med samtykke. Uden for vagten forsvinder de fra kortet.',
+ m_h:'Send besked', m_to:'Modtagere', m_all:'Hele området', m_zone:'Ét område', m_staff:'Kun team', m_tpl:'Hurtige skabeloner', m_ph:'Skriv beskeden…',
+ m_send:'Send besked', m_sent:'Besked sendt', m_reach:'≈ {n} personer', m_hist:'Sendt', m_none:'Du har ikke sendt nogen beskeder endnu.', m_empty:'Skriv en besked først',
+ m_t1:'{z}: koncerten starter 15 min forsinket', m_t2:'{z} er fuld. Brug de alternative indgange', m_t3:'Gratis vand ved infopunktet', m_t4:'Uvejr om 30 min: søg ly i teltene',
+ m_note:'Leveres som notifikation til dem, der har appen åben og har accepteret festivalbeskeder.',
+ fan_push:'📣 Besked fra festivalen', fan_push_b:'Øst-scenen: koncerten starter 15 min forsinket'
+});
+
+const ROLES={sec:{icon:'🛡',c:'#2b59c3'},med:{icon:'✚',c:'#c4210a'},clean:{icon:'♻',c:'#1a7a3c'},info:{icon:'i',c:'#7a4fc0'}};
+const TTYPES={crowd:{role:'sec',icon:'👥'},med:{role:'med',icon:'⛑'},lost:{role:'info',icon:'🔎'},clean:{role:'clean',icon:'🧹'},supply:{role:'clean',icon:'📦'}};
+const CAP={main:115,food:110,south:100,west:85,bridge:70,circus:65,pier:55,north:90,east:90,market:60,camp:100,dance:70}; // simulated capacities
+const STAFF0=[
+ {id:'ANA',role:'sec',post:'main'},{id:'JON',role:'sec',post:'east'},{id:'IRIS',role:'sec',post:'west'},
+ {id:'MARC',role:'med',post:'bridge'},{id:'SARA',role:'med',post:'south'},
+ {id:'LEO',role:'clean',post:'north'},{id:'NOA',role:'clean',post:'dance'},{id:'TEO',role:'info',post:'circus'}];
+const ORG={tab:'live',layers:{heat:true,staff:true,tasks:true},staff:[],tasks:[],msgs:[],seq:0,
+  form:{type:'crowd',zone:'main',prio:'normal'},msg:{to:'all',zone:'east'},pick:false,zones:[],handled:{},warned:{},on:{},hl:null};
+const ORG_TABS=['live','tasks','team','msg'];
+Object.assign(ICON,{
+ live:'<svg viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>',
+ tasks:'<svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="1.5"/><path d="M9 4V3h6v1M9 12.5l2 2 4-4"/></svg>',
+ team:'<svg viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.3"/><path d="M5 21c0-4 3.1-7 7-7s7 3 7 7"/><path d="m10.5 14 1.5 3 1.5-3"/></svg>',
+ msg:'<svg viewBox="0 0 24 24"><path d="M3 10v4h3l7 5V5l-7 5H3z"/><path d="M16.5 9a4 4 0 0 1 0 6M19 6.5a7.5 7.5 0 0 1 0 11"/></svg>'
+});
+const zName=id=>t('z_'+id);
+const hopsM=h=>Math.round(h*14/PXM/10)*10;           // graph hops → metres (rounded)
+const etaMin=m=>Math.max(1,Math.ceil(m/75));          // walking through a crowd ≈ 75 m/min
+const etaTxt=m=>m<25?t('t_here'):t('t_eta',{m:etaMin(m),d:m});
+const setH=(el,h)=>{ if(el&&el._h!==h){el._h=h;el.innerHTML=h;} };
+
+function orgStart(){
+  for(const s of STAFF0){const p=POI_BY[s.post],w=new Walker(p.x+rnd(-12,12),p.y+rnd(-12,12),rnd(38,46),'staff');
+    w.node=p.node; w.wait=rnd(5,25); w.at=s.post; w.st={...s,task:null}; w.pick=()=>w.st.task?POI_BY[w.st.task.zone]:patrolPoi(w); ORG.staff.push(w);}
+  for(let i=0;i<160;i++) for(const w of demo.crowd) w.step(1);   // warm-up: start from a steady crowd
+  world.classList.add('org'); vp.classList.add('org');
+  orgDraw();
+}
+function patrolPoi(w){ // free staff stay around their post
+  if(w.at!==w.st.post) return POI_BY[w.st.post];
+  const near=POIS.filter(p=>p.id!==w.st.post).sort((a,b)=>demo.dist[w.st.post][a.node]-demo.dist[w.st.post][b.node]).slice(0,2);
+  return near[Math.floor(Math.random()*near.length)];
+}
+function staffState(w){const k=w.st.task;return !k?'free':k.state;}
+function nearestFree(role,zone){
+  let best=null,bd=1e9; for(const w of ORG.staff){ if(w.st.role!==role||w.st.task) continue; const d=demo.dist[zone][w.node]; if(d<bd){bd=d;best=w;} }
+  return best;
+}
+function newTask(type,zone,prio,src){
+  const k={id:'T'+(++ORG.seq),type,zone,prio:prio||'normal',state:'open',src:src||'',w:null,t0:demo.tick,eta:0,m:0}; ORG.tasks.unshift(k); return k;
+}
+function assign(k,quiet){
+  const role=TTYPES[k.type].role, w=nearestFree(role,k.zone);
+  if(!w){ toast(t('t_nofree',{r:t('r_'+role)}),'','a'); return false; }
+  const m=hopsM(demo.dist[k.zone][w.node]); k.w=w; k.state='enroute'; k.m=m; k.eta=etaMin(m); w.st.task=k;
+  w.hold=false; w.wait=0; w.at=null; w.go(POI_BY[k.zone]);
+  if(!quiet) toast(t('t_assigned',{n:w.st.id}),t('tt_'+k.type)+' · '+zName(k.zone)+' · '+etaTxt(m),'g',3200);
+  orgDraw(); return true;
+}
+function cancelTask(k){ if(k.w){k.w.st.task=null;k.w.hold=false;k.w.wait=rnd(5,15);} ORG.tasks=ORG.tasks.filter(x=>x!==k); orgDraw(); }
+function orgTick(){
+  for(const w of ORG.staff){
+    w.step(1); const k=w.st.task; if(!k) continue;
+    if(k.state==='enroute'&&w.at===k.zone){k.state='working';k.t1=demo.tick;w.hold=true;}
+    else if(k.state==='working'&&demo.tick-k.t1>=8){
+      k.state='done'; k.tDone=demo.tick; w.st.task=null; w.hold=false; w.wait=rnd(10,25);
+      if(k.type==='crowd') ORG.handled[k.zone]=demo.tick;
+      toast(t('t_completed',{t:t('tt_'+k.type),z:zName(k.zone)}),t('t_completed_b',{n:w.st.id}),'g',2800);
+    }
+  }
+  if(demo.tick===14){const k=newTask('med','food','urgent','inc_med');toast(t('inc_new'),t('inc_med')+' · '+zName('food'),'r',4200);}
+  if(demo.tick===70){newTask('lost','bridge','urgent','inc_lost');toast(t('inc_new'),t('inc_lost'),'r',4200);}
+  orgDraw();
+}
+/* ── map layer: staff + incidents ── */
+function orgDraw(){
+  for(const w of ORG.staff){
+    const id='st_'+w.st.id, r=ROLES[w.st.role];
+    if(!ORG.layers.staff){dropMk(id);continue;}
+    let m=Mk[id]; if(!m){m=Mk[id]={first:true,el:mkMake(id,'staff','<div class="mk-in"><div class="sf-b"></div><div class="mk-nm"></div></div>')};}
+    m.el.style.setProperty('--c',r.c); $('.sf-b',m.el).textContent=r.icon; $('.mk-nm',m.el).textContent=w.st.id;
+    m.el.classList.toggle('busy',!!w.st.task); m.el.classList.toggle('sel',ORG.hl===id); mkPlace(m,w.x,w.y);
+  }
+  const live=new Set();
+  for(const k of ORG.tasks){ if(k.state==='done'||!ORG.layers.tasks) continue; const id='tk_'+k.id; live.add(id); const z=POI_BY[k.zone];
+    let m=Mk[id]; if(!m){m=Mk[id]={first:true,el:mkMake(id,'task','<div class="mk-in"><div class="tk-p"></div></div>')};}
+    m.el.dataset.st=k.state; $('.tk-p',m.el).textContent=TTYPES[k.type].icon; m.el.classList.toggle('sel',ORG.hl===id);
+    const n=ORG.tasks.filter(x=>x.zone===k.zone&&x.state!=='done'),i=n.indexOf(k); mkPlace(m,z.x+(i*30)-((n.length-1)*15),z.y-30);
+  }
+  Object.keys(Mk).forEach(id=>{if(id.startsWith('tk_')&&!live.has(id))dropMk(id);});
+  orgRefresh();
+}
+/* ── panels ── */
+function zoneRows(){ return ORG.zones.map(z=>({...z,cap:CAP[z.id],pct:Math.round(z.n/CAP[z.id]*100)})).sort((a,b)=>b.pct-a.pct); }
+const lvl=p=>p>=90?'r':p>=70?'a':'g';
+function activeAlerts(){
+  return zoneRows().filter(z=>ORG.on[z.id]&&z.n>=K_MIN&&!(ORG.handled[z.id]&&demo.tick-ORG.handled[z.id]<60));
+}
+function orgStats(zones){ // light smoothing so percentages don't jump every tick
+  const prev=Object.fromEntries((ORG.zones||[]).map(z=>[z.id,z.n]));
+  ORG.zones=zones.map(z=>({id:z.id,n:prev[z.id]===undefined?z.n:Math.round(prev[z.id]*.6+z.n*.4)}));
+  for(const z of zoneRows()){ if(z.pct>=90) ORG.on[z.id]=1; else if(z.pct<85) ORG.on[z.id]=0; }   // hysteresis
+  for(const z of activeAlerts()){ if(!ORG.warned[z.id]){ORG.warned[z.id]=1; if(demo.tick-(ORG.lastWarn||-99)>=12){ORG.lastWarn=demo.tick;toast('⚠ '+t('o_alert',{z:zName(z.id),p:z.pct}),t('o_alert_sub'),'r',4200);}} }
+  for(const z of zoneRows()) if(z.pct<80) ORG.warned[z.id]=0;
+  orgRefresh();
+}
+function orgRefresh(){
+  if(!orgMode()||!S.started) return; const k=ORG.tab;
+  if(k==='live'){
+    const rows=zoneRows(),top=rows[0],open=ORG.tasks.filter(x=>x.state!=='done'),done=ORG.tasks.filter(x=>x.eta);
+    const avg=done.length?Math.round(done.reduce((s,x)=>s+x.eta,0)/done.length):0;
+    setH($('#o-kpi'),`<div class="kpi"><b>${demo.crowd.length}</b><small>${esc(t('o_now'))}</small></div>
+      <div class="kpi ${top?lvl(top.pct):''}"><b>${top?top.pct+'%':'—'}</b><small>${top?esc(zName(top.id)):esc(t('o_busiest'))}</small></div>
+      <div class="kpi ${open.length?'r':''}"><b>${open.length}</b><small>${esc(t('o_open'))}</small></div>
+      <div class="kpi"><b>${avg?avg+' min':'—'}</b><small>${esc(t('o_resp'))}</small></div>`);
+    const al=activeAlerts();
+    setH($('#o-alerts'),al.length?al.map(z=>{const onway=ORG.tasks.some(x=>x.type==='crowd'&&x.zone===z.id&&x.state!=='done');
+      return `<div class="alert"><div class="al-t">⚠ ${esc(t('o_alert',{z:zName(z.id),p:z.pct}))}</div><div class="al-s">${esc(t('o_alert_sub'))}</div>
+      <div class="row2">${onway?`<span class="al-ok">✓ ${esc(t('o_on_way'))}</span>`:`<button class="sbtn p" data-act="o-sec" data-z="${z.id}">${esc(t('o_send_sec'))}</button>`}<button class="sbtn" data-act="o-notify" data-z="${z.id}">${esc(t('o_notify'))}</button></div></div>`;}).join('')
+      :`<div class="okline">✓ ${esc(t('o_ok'))}</div>`);
+    setH($('#o-cap'),rows.map(z=>{const low=z.n<K_MIN;
+      return `<button class="cz" data-act="zone" data-id="${z.id}"><span class="cz-n">${POI_BY[z.id].icon} ${esc(zName(z.id))}</span><span class="cz-b"><i class="${lvl(z.pct)}" style="width:${low?0:Math.min(100,z.pct)}%"></i></span><span class="cz-v">${low?'<'+K_MIN:z.pct+'%'}</span></button>`;}).join(''));
+  } else if(k==='tasks'){
+    const open=ORG.tasks.filter(x=>x.state!=='done'),done=ORG.tasks.filter(x=>x.state==='done');
+    setH($('#t-list'),open.length?open.map(taskCard).join(''):`<div class="empty">${esc(t('t_none'))}</div>`);
+    setH($('#t-done'),done.length?`<div class="sl">${esc(t('t_done_h',{n:done.length}))}</div>`+done.slice(0,6).map(x=>`<div class="tdone">${TTYPES[x.type].icon} ${esc(t('tt_'+x.type))} · ${esc(zName(x.zone))}<small>${esc(x.w?x.w.st.id:'')} · ${esc(t('t_took',{m:x.eta}))}</small></div>`).join(''):'');
+  } else if(k==='team'){
+    const by={}; for(const w of ORG.staff){(by[w.st.role]=by[w.st.role]||[]).push(w);}
+    setH($('#tm-sum'),Object.keys(ROLES).map(r=>{const a=by[r]||[],f=a.filter(w=>!w.st.task).length;
+      return `<div class="rsum" style="--c:${ROLES[r].c}"><span class="rb">${ROLES[r].icon}</span><span class="rs-i"><b>${esc(t('r_'+r))}</b><small>${esc(t('tm_free',{n:f}))} / ${a.length}</small></span></div>`;}).join(''));
+    setH($('#tm-list'),ORG.staff.map(w=>{const s=staffState(w),k=w.st.task,z=k?k.zone:(w.at||nearZone(w));
+      const lab=s==='free'?t('tm_s_free',{z:zName(z)}):s==='enroute'?t('tm_s_enroute',{z:zName(z)})+' · '+etaTxt(hopsM(demo.dist[z][w.node])):t('tm_s_working',{z:zName(z)});
+      return `<button class="sc${ORG.hl==='st_'+w.st.id?' sel':''}" data-act="o-staff" data-id="${w.st.id}" style="--c:${ROLES[w.st.role].c}"><span class="rb">${ROLES[w.st.role].icon}</span><span class="sc-i"><b>${esc(w.st.id)} <em>${esc(t('r_'+w.st.role))}</em></b><small class="${s}">${esc(lab)}</small></span></button>`;}).join(''));
+  } else if(k==='msg'){
+    setH($('#m-hist'),ORG.msgs.length?ORG.msgs.map(m=>`<div class="mh1"><div>${esc(m.text)}</div><small>${esc(m.to)} · ${esc(t('m_reach',{n:m.n}))} · ${esc(m.at)}</small></div>`).join(''):`<div class="empty">${esc(t('m_none'))}</div>`);
+  }
+}
+function nearZone(w){let b='main',bd=1e9;for(const p of POIS){const d=(p.x-w.x)**2+(p.y-w.y)**2;if(d<bd){bd=d;b=p.id;}}return b;}
+function taskCard(k){
+  const w=k.w, st=k.state, rem=w?hopsM(demo.dist[k.zone][w.node]):0;
+  const who=w?`<span class="tw" style="--c:${ROLES[w.st.role].c}">${ROLES[w.st.role].icon}</span><b>${esc(w.st.id)}</b>${st==='enroute'?' · '+esc(etaTxt(rem)):''}`:'';
+  return `<div class="tc ${st}${k.prio==='urgent'?' urg':''}${ORG.hl==='tk_'+k.id?' sel':''}" data-act="o-task" data-id="${k.id}">
+    <div class="tc-h"><span class="tc-i">${TTYPES[k.type].icon}</span><span class="tc-t"><b>${esc(t('tt_'+k.type))}</b><small>${POI_BY[k.zone].icon} ${esc(zName(k.zone))}${k.src?' · '+esc(t(k.src)):''}</small></span><span class="tc-s">${esc(t('ts_'+st))}</span></div>
+    <div class="tc-f">${st==='open'?`<button class="sbtn p" data-act="o-assign" data-id="${k.id}">${esc(t('t_assign'))}</button>`:`<span class="tc-w">${who}</span>`}<button class="sbtn ghost" data-act="o-cancel" data-id="${k.id}">${esc(t('t_cancel'))}</button></div></div>`;
+}
+function orgPanel(k){
+  const p=$('#panel'); let h='';
+  if(k==='live'){
+    h=`<div class="kpis" id="o-kpi"></div>
+      <div class="sl">${esc(t('o_alerts'))}</div><div id="o-alerts" class="alerts"></div>
+      <div class="sl">${esc(t('o_time'))}</div><div class="sim"><button class="sbtn" style="flex:0 0 112px" data-act="play" id="o-play">${esc(t(demo.play?'org_pause':'org_play'))}</button><input type="range" id="o-hour" min="17" max="25" step="0.5" value="${demo.hour}"><output id="o-out">${fmtHour(demo.hour)}</output></div>
+      <div class="sl">${esc(t('o_cap_h'))}</div><div class="caps" id="o-cap"></div><div class="hint">${esc(t('o_cap_hint'))}</div>
+      <div class="note">${esc(t('o_priv',{k:K_MIN}))}</div>`;
+  } else if(k==='tasks'){
+    const f=ORG.form;
+    h=`<div class="box tf"><div class="sl">${esc(t('t_new'))}</div>
+      <div class="lbl2">${esc(t('t_type'))}</div><div class="ttypes">${Object.keys(TTYPES).map(x=>`<button class="tt${f.type===x?' on':''}" data-act="f-type" data-v="${x}"><span>${TTYPES[x].icon}</span>${esc(t('tt_'+x))}</button>`).join('')}</div>
+      <div class="lbl2">${esc(t('t_zone'))}</div><div class="frow"><select class="sel" id="f-zone">${POIS.map(z=>`<option value="${z.id}"${z.id===f.zone?' selected':''}>${z.icon} ${esc(zName(z.id))}</option>`).join('')}</select><button class="sbtn${ORG.pick?' p':''}" style="flex:0 0 84px" data-act="f-pick">${esc(t('t_onmap'))}</button></div>
+      <div class="lbl2">${esc(t('t_prio'))}</div><div class="seg"><button class="${f.prio==='normal'?'on':''}" data-act="f-prio" data-v="normal">${esc(t('t_normal'))}</button><button class="${f.prio==='urgent'?'on u':''}" data-act="f-prio" data-v="urgent">${esc(t('t_urgent'))}</button></div>
+      <button class="btn btn-p wide" data-act="f-go">${esc(t('t_create_assign'))}</button><button class="lnk" data-act="f-go0">${esc(t('t_create'))}</button></div>
+      <div class="sl">${esc(t('t_active'))}</div><div id="t-list" class="tlist"></div><div id="t-done"></div>`;
+  } else if(k==='team'){
+    h=`<div class="sl">${esc(t('tm_h'))}</div><div class="rsums" id="tm-sum"></div><div id="tm-list" class="tlist"></div><div class="note">${esc(t('tm_priv'))}</div>`;
+  } else if(k==='msg'){
+    const m=ORG.msg;
+    h=`<div class="box tf"><div class="sl">${esc(t('m_h'))}</div>
+      <div class="lbl2">${esc(t('m_to'))}</div><div class="seg">${['all','zone','staff'].map(x=>`<button class="${m.to===x?'on':''}" data-act="m-to" data-v="${x}">${esc(t('m_'+x))}</button>`).join('')}</div>
+      ${m.to==='zone'?`<select class="sel" id="m-zone" style="margin-top:8px">${POIS.map(z=>`<option value="${z.id}"${z.id===m.zone?' selected':''}>${z.icon} ${esc(zName(z.id))}</option>`).join('')}</select>`:''}
+      <div class="lbl2">${esc(t('m_tpl'))}</div><div class="tpls">${['m_t1','m_t2','m_t3','m_t4'].map(x=>`<button class="tpl" data-act="m-tpl" data-v="${x}">${esc(t(x,{z:zName(m.zone)}))}</button>`).join('')}</div>
+      <textarea class="txt ta" id="m-text" maxlength="140" placeholder="${esc(t('m_ph'))}">${esc(m.text||'')}</textarea>
+      <button class="btn btn-p wide" data-act="m-send">${esc(t('m_send'))}</button><div class="hint" style="margin-top:8px">${esc(t('m_note'))}</div></div>
+      <div class="sl">${esc(t('m_hist'))}</div><div id="m-hist" class="tlist"></div>`;
+  }
+  p.innerHTML=h; p.scrollTop=0; orgRefresh();
+}
+function orgAct(a,b){
+  const f=ORG.form,byId=id=>ORG.tasks.find(x=>x.id===id);
+  if(a==='o-sec'){const k=newTask('crowd',b.dataset.z,'urgent');assign(k);}
+  else if(a==='o-notify'){ORG.msg={to:'zone',zone:b.dataset.z,text:t('m_t2',{z:zName(b.dataset.z)})};setTab('msg');}
+  else if(a==='o-assign'){const k=byId(b.dataset.id);if(k)assign(k);}
+  else if(a==='o-cancel'){const k=byId(b.dataset.id);if(k)cancelTask(k);}
+  else if(a==='o-task'){const k=byId(b.dataset.id);if(!k)return;ORG.hl='tk_'+k.id;const z=POI_BY[k.zone];flyTo(z.x,z.y,Math.max(V.s,1.2));orgDraw();if(isMobile())$('#side').classList.add('collapsed');}
+  else if(a==='o-staff'){const w=ORG.staff.find(x=>x.st.id===b.dataset.id);if(!w)return;ORG.hl='st_'+w.st.id;flyTo(w.x,w.y,Math.max(V.s,1.3));orgDraw();if(isMobile())$('#side').classList.add('collapsed');}
+  else if(a==='f-type'){f.type=b.dataset.v;orgPanel('tasks');}
+  else if(a==='f-prio'){f.prio=b.dataset.v;orgPanel('tasks');}
+  else if(a==='f-pick'){ORG.pick=!ORG.pick;vp.classList.toggle('pick',ORG.pick);if(ORG.pick){toast(t('t_pick_tap'),'','',2600);if(isMobile())$('#side').classList.add('collapsed');}orgPanel('tasks');}
+  else if(a==='f-go'||a==='f-go0'){f.zone=$('#f-zone').value;const k=newTask(f.type,f.zone,f.prio);if(a==='f-go'){if(!assign(k))orgDraw();}else{toast(t('t_created'),t('tt_'+k.type)+' · '+zName(k.zone),'',2400);orgDraw();}}
+  else if(a==='m-to'){ORG.msg.text=$('#m-text').value;ORG.msg.to=b.dataset.v;orgPanel('msg');}
+  else if(a==='m-tpl'){$('#m-text').value=t(b.dataset.v,{z:zName(ORG.msg.zone)});}
+  else if(a==='m-send'){
+    const tx=$('#m-text').value.trim(); if(!tx){toast(t('m_empty'),'','a');return;} const m=ORG.msg;
+    const n=m.to==='all'?demo.crowd.length:m.to==='staff'?ORG.staff.length:Math.max(K_MIN,(ORG.zones.find(z=>z.id===m.zone)||{n:0}).n);
+    ORG.msgs.unshift({text:tx,to:m.to==='zone'?zName(m.zone):t('m_'+m.to),n,at:fmtHour(demo.hour)}); m.text='';
+    toast(t('m_sent'),t('m_reach',{n}),'g',2600); orgPanel('msg');
+  }
+  else if(a==='lay'){const l=b.dataset.v;ORG.layers[l]=!ORG.layers[l];$('#heat').classList.toggle('on',ORG.layers.heat);orgLegend();orgDraw();}
+}
+function orgLegend(){
+  const lg=$('#legend'); lg.classList.remove('hide');
+  lg.innerHTML=`<div class="lays">${['heat','staff','tasks'].map(l=>`<button class="lay${ORG.layers[l]?' on':''}" data-act="lay" data-v="${l}">${esc(t('lay_'+l))}</button>`).join('')}</div>`
+   +(ORG.layers.heat?`<b>${esc(t('leg_heat'))}</b><div class="bar"></div><div class="row"><span>${esc(t('leg_lo'))}</span><span>≥${K_MIN}</span><span>${esc(t('leg_hi'))}</span></div>`:'');
+}
+$('#legend').addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(b&&orgMode())orgAct(b.dataset.act,b);});
+function orgMapTap(w){
+  if(!ORG.pick) return; ORG.pick=false; vp.classList.remove('pick');
+  let b=POIS[0],bd=1e9; for(const p of POIS){const d=(p.x-w.x)**2+(p.y-w.y)**2;if(d<bd){bd=d;b=p;}}
+  ORG.form.zone=b.id; ripple(b.x,b.y); toast(t('t_zone_set',{z:zName(b.id)}),'','g',1800); setTab('tasks');
+}
+function orgMarkerTap(id){
+  if(id.startsWith('st_')){ORG.hl=id;setTab('team');orgDraw();}
+  else if(id.startsWith('tk_')){ORG.hl=id;setTab('tasks');orgDraw();}
+}
+
 boot();
 </script>
 </body>
