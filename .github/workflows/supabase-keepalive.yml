@@ -1,0 +1,23 @@
+# Mantiene activo el proyecto Supabase gratuito (que se pausa tras ~1 semana sin actividad)
+# haciendo una consulta mínima cada 2 días. La clave "anon" es pública por diseño
+# (ya está en el HTML de la app), por eso no hace falta guardarla como secreto.
+# Si el proyecto YA está pausado, esta consulta falla y GitHub te avisa por correo:
+# entonces entra en el panel de Supabase y pulsa "Restore project".
+name: supabase-keepalive
+on:
+  schedule:
+    - cron: '17 6 */2 * *'
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST
+        env:
+          SB_URL: https://jootvxinokfwffkdhony.supabase.co
+          SB_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impvb3R2eGlub2tmd2Zma2Rob255Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNDEyMTcsImV4cCI6MjA5MDkxNzIxN30.gJ7aDKudwWNb_WDsMUB8l375CmbD_C3O_-_EUCRmMbo
+        run: |
+          curl -fsS --max-time 20 \
+            -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+            "$SB_URL/rest/v1/positions?select=id&limit=1" > /dev/null
+          echo "Supabase responde: proyecto activo."
