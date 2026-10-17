@@ -21,6 +21,12 @@ Un único repositorio estático (`YerayHalero/findycrew`) con **landing + app + 
 | i18n | Diccionario `TR` + `t()` (ES/EN/DA). |
 | QR | qrcode-generator (MIT, K. Arase) minificado; canvas en la app, SVG en la landing. `assets/qr-demo.svg/png` para flyers/dossier. |
 
+## 2b. Panel del organizador (demo, 17 oct)
+- Entrada a la demo con selector de rol (`role=fan|org`). El QR lleva al selector.
+- Organizador, 4 pestañas: **En vivo** (KPIs, alertas de aforo ≥90 % con histéresis hasta <85 %, hora simulada, aforo por zona), **Tareas** (tipo → zona → prioridad → «Crear y asignar al más cercano»; distancia por caminos del grafo), **Equipo** (staff en turno por rol y estado), **Avisos** (todo el recinto / una zona / solo equipo, con plantillas).
+- Capas del mapa conmutables: calor, equipo, incidencias. Asistentes solo agregados (k ≥ 10); el staff sí aparece individualmente (comparte ubicación en turno con consentimiento — Nuria: revisar base legal laboral/GDPR antes de un piloto real).
+- Todo es simulado en el navegador (`scratchpad src/h_org.js` → incluido en `app/index.html`). Nada de esto existe aún en el modo real.
+
 ## 3. Seguridad — estado honesto
 Hecho en cliente: solo se piden filas de los códigos de tu crew; todo dato remoto se escapa (anti‑XSS); se borra tu fila al pasar a invisible y en `pagehide` (`fetch keepalive`); eliminado todo el código de admin/PIN de la versión nueva.
 **Pendiente (importante):**

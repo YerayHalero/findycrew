@@ -4,7 +4,7 @@ Web + app para encontrar a tu grupo en un festival sin perder la batería ni com
 
 - **Landing:** `index.html` (ES / EN / DA, comparte idioma con la app).
 - **App (PWA):** `app/index.html` — modo real y modo demo.
-- **Demo sin backend:** `app/?demo=1` → simulación autocontenida (amigos, multitud, vista de organizador con agregados k‑anónimos). Es lo que enlaza el código QR de la web.
+- **Demo sin backend:** `app/?demo=1` → pregunta al entrar si eres asistente u organizador (es lo que enlaza el QR). Accesos directos: `?demo=1&role=fan` (app del asistente) y `?demo=1&role=org` (panel del organizador: mapa de calor, aforo y alertas, tareas al staff más cercano, avisos por zona).
 
 ## Estructura
 ```
