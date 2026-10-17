@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Y Crew — Location consent (mockup)</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f3ee;--ink:#1a1814;--ink2:#4a4640;--ink3:#8a8278;--acc:#ff4500;--line:rgba(26,24,20,.12);--ok:#1a7a3c;
+  --fd:'Syne',sans-serif;--fm:'Syne Mono',monospace;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fd);background:#d9d4ca;color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 12px;gap:16px}
+.note{max-width:420px;font-family:var(--fm);font-size:11px;line-height:1.6;color:var(--ink2);background:#fff;border:1px dashed var(--ink3);padding:10px 12px}
+.note b{color:var(--acc)}
+.phone{width:375px;max-width:100%;background:var(--bg);border:8px solid var(--ink);border-radius:28px;overflow:hidden;box-shadow:0 20px 40px -20px rgba(0,0,0,.4)}
+.hdr{background:var(--ink);color:#fff;padding:14px 18px;font-weight:800;font-size:15px}
+.hdr span{color:var(--acc)}
+.body{padding:22px 20px 20px}
+.kicker{font-family:var(--fm);font-size:10px;letter-spacing:2px;color:var(--acc);margin-bottom:8px}
+h1{font-size:22px;font-weight:800;line-height:1.15;margin-bottom:10px}
+.lead{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:18px}
+.facts{border-top:1px solid var(--line);margin-bottom:18px}
+.fact{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.fact svg{width:22px;height:22px;flex-shrink:0;stroke:var(--acc);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+.fact h3{font-size:13px;font-weight:700;margin-bottom:2px}
+.fact p{font-size:12px;color:var(--ink2);line-height:1.5}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;line-height:1.5;margin-bottom:16px;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--acc);flex-shrink:0}
+.btn{width:100%;padding:13px;border:none;border-radius:2px;font-family:var(--fd);font-weight:700;font-size:13px;letter-spacing:.4px;cursor:pointer}
+.btn-primary{background:var(--acc);color:#fff}
+.btn-primary:disabled{background:#c9c3b8;cursor:not-allowed}
+.btn-ghost{background:transparent;color:var(--ink2);margin-top:8px;border:1px solid var(--line)}
+.legal{font-size:11px;color:var(--ink3);text-align:center;margin-top:14px;line-height:1.5}
+.legal a{color:var(--ink2)}
+.done{display:none;padding:40px 20px;text-align:center}
+.done h2{font-size:18px;margin-bottom:8px}
+.done p{font-size:13px;color:var(--ink2)}
+</style>
+</head>
+<body>
+
+<div class="note">
+  <b>MOCKUP — USO INTERNO.</b> Pantalla de consentimiento propuesta (Nuria + Iván). Va después de crear el perfil y antes de pedir permiso de GPS al navegador.
+  El texto describe el comportamiento <b>objetivo</b>: "borrado al salir" y "solo quien tú elijas" requieren antes la limpieza en servidor, RLS y amistad aprobada (ver traspaso técnico, puntos 2–5). No es asesoría legal: validar con un abogado GDPR.
+</div>
+
+<div class="phone">
+  <div class="hdr">Find <span>Y</span> Crew</div>
+
+  <div class="body" id="consent">
+    <div class="kicker">BEFORE YOU START</div>
+    <h1>Share your location with your crew?</h1>
+    <p class="lead">Find Y Crew only works if you choose to share where you are. Here's exactly what that means.</p>
+
+    <div class="facts">
+      <div class="fact">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        <div><h3>What we share</h3><p>Your live position, your name, avatar and any status you post.</p></div>
+      </div>
+      <div class="fact">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.5 2.7-6 5.5-6s5.5 2.5 5.5 6"/><circle cx="17.5" cy="9.5" r="2.6"/><path d="M15.2 14.3c2.3.3 4.3 2.5 4.3 5.7"/></svg>
+        <div><h3>Who sees it</h3><p>Only people in your crew. Never the festival, advertisers or other attendees as an identifiable person.</p></div>
+      </div>
+      <div class="fact">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+        <div><h3>For how long</h3><p>Only while the app is open. Your position is deleted when you leave, and automatically after 30 minutes without updates.</p></div>
+      </div>
+      <div class="fact">
+        <svg viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 5.2A10.6 10.6 0 0 1 12 5c5 0 9 4.5 10 7-.5 1.1-1.4 2.5-2.7 3.7M6.6 6.6C4.4 8 2.9 10 2 12c1 2.5 5 7 10 7 1.4 0 2.7-.3 3.9-.8"/></svg>
+        <div><h3>You're in control</h3><p>Go invisible or switch to approximate location (~100 m) at any time from the Crew tab.</p></div>
+      </div>
+    </div>
+
+    <div class="fact" style="border-top:1px solid var(--line);margin:-18px 0 14px">
+      <svg viewBox="0 0 24 24"><rect x="3" y="12" width="4" height="8"/><rect x="10" y="7" width="4" height="13"/><rect x="17" y="3" width="4" height="17"/></svg>
+      <div><h3>Anonymous crowd statistics (optional)</h3><p>If you allow it, your position is counted, without your name or code, in heatmaps and crowd levels per area that the festival uses to improve the site. Groups smaller than a minimum size are never shown.</p></div>
+    </div>
+    <label class="check">
+      <input type="checkbox" id="agree">
+      <span>I agree to share my live location with my crew while I use Find Y Crew.</span>
+    </label>
+
+    <label class="check">
+      <input type="checkbox" id="stats">
+      <span>Include me in anonymous crowd statistics. <em style="color:var(--ink3)">(Optional, doesn't affect the app.)</em></span>
+    </label>
+
+    <button class="btn btn-primary" id="go" disabled>Share & continue</button>
+    <button class="btn btn-ghost" id="skip">Not now — browse invisibly</button>
+
+    <p class="legal">Read the full <a href="#">Privacy notice</a> · Data controller: YM Enterprise</p>
+  </div>
+
+  <div class="done" id="done">
+    <h2 id="done-title"></h2>
+    <p id="done-text"></p>
+  </div>
+</div>
+
+<script>
+const agree=document.getElementById('agree'), go=document.getElementById('go');
+agree.addEventListener('change',()=>{go.disabled=!agree.checked;});
+function finish(t,p){document.getElementById('consent').style.display='none';
+  document.getElementById('done').style.display='block';
+  document.getElementById('done-title').textContent=t;document.getElementById('done-text').textContent=p;}
+go.addEventListener('click',()=>finish('Next: browser GPS permission','The app would now ask the browser for location access.'));
+document.getElementById('skip').addEventListener('click',()=>finish('Invisible mode','You can see the map but nobody sees you. Turn sharing on later from the Crew tab.'));
+</script>
+</body>
+</html>

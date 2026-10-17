@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Y Crew — Coordinación en tiempo real para tu evento</title>
+<meta name="description" content="Find Y Crew: encuentra a tu gente en el festival y controla tu evento. Prueba la demo en tu móvil.">
+<meta name="theme-color" content="#1a1814">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:     #fefdfb;
+  --bg2:    #f6f4ee;
+  --ink:    #1a1814;
+  --ink2:   #4a4640;
+  --ink3:   #8a8278;
+  --white:  #ffffff;
+  --accent: #ff4500;
+  --acc2:   #ff6a35;
+  --border: rgba(26,24,20,.08);
+  --border2:rgba(26,24,20,.16);
+  --border-w: rgba(255,255,255,.14);
+  --font-d: 'Syne', sans-serif;
+  --font-m: 'Syne Mono', monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:64px;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-d);line-height:1.5;-webkit-font-smoothing:antialiased;}
+a{color:inherit;}
+img,svg{display:block;max-width:100%;}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+nav{position:sticky;top:0;z-index:100;background:var(--ink);height:64px;}
+nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:18px;}
+.logo{font-size:20px;font-weight:800;color:var(--white);letter-spacing:-0.3px;}
+.logo span{color:var(--accent);}
+.nav-right{display:flex;align-items:center;gap:22px;}
+.nav-links{display:flex;align-items:center;gap:26px;font-size:14.5px;color:rgba(255,255,255,.65);}
+.nav-links a{text-decoration:none;transition:color .15s;}
+.nav-links a:hover{color:var(--white);}
+.lang-dropdown{position:relative;}
+.lang-toggle{background:transparent;border:1px solid var(--border-w);color:rgba(255,255,255,.9);
+  font-size:15px;line-height:1;padding:7px 10px;border-radius:2px;
+  cursor:pointer;transition:all .15s;}
+.lang-toggle:hover{border-color:var(--accent);}
+.lang-menu{position:absolute;top:calc(100% + 6px);right:0;background:var(--ink);
+  border:1px solid var(--border-w);border-radius:2px;display:none;flex-direction:column;
+  overflow:hidden;z-index:50;min-width:44px;}
+.lang-menu.open{display:flex;}
+.lang-menu button{background:none;border:none;color:var(--white);font-size:16px;padding:9px 12px;
+  cursor:pointer;text-align:left;transition:background .15s;}
+.lang-menu button:hover{background:rgba(255,255,255,.08);}
+.nav-cta{background:var(--accent);color:var(--white);padding:9px 18px;border-radius:2px;font-size:12px;
+  font-weight:700;letter-spacing:.5px;text-decoration:none;transition:background .15s;white-space:nowrap;}
+.nav-cta:hover{background:var(--acc2);}
+.burger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:8px;}
+.burger span{width:20px;height:2px;background:var(--white);}
+.mobile-panel{display:none;background:var(--ink);border-top:1px solid var(--border-w);}
+.mobile-panel.open{display:flex;flex-direction:column;padding:6px 24px 18px;gap:2px;}
+.mobile-panel a{color:rgba(255,255,255,.75);text-decoration:none;font-size:14px;padding:12px 0;
+  border-bottom:1px solid var(--border-w);}
+.mobile-panel .lang-dropdown{margin:12px 0 2px;}
+.mobile-panel .lang-menu{right:auto;left:0;}
+
+/* ── HERO ────────────────────────────────────────────────────── */
+.hero{background:var(--bg);padding:76px 0 84px;}
+.hero .wrap{display:grid;grid-template-columns:.82fr 1.18fr;gap:48px;align-items:center;}
+.hero h1{font-size:44px;font-weight:800;letter-spacing:0;line-height:1.18;margin-bottom:18px;color:var(--ink);}
+.hero h1 .h1-line{display:block;}
+.hero h1 .h1-line + .h1-line{margin-top:20px;}
+.hero h1 .h1-line-accent{color:var(--accent);}
+.hero p.lead{font-size:16px;color:var(--ink2);max-width:46ch;line-height:1.7;margin-bottom:32px;}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{display:inline-block;padding:13px 24px;border-radius:2px;font-size:13px;font-weight:700;
+  letter-spacing:.4px;text-decoration:none;transition:all .15s;border:1.5px solid transparent;}
+.btn-primary{background:var(--accent);color:var(--white);}
+.btn-primary:hover{background:var(--acc2);}
+.btn-ghost{border-color:var(--border2);color:var(--ink2);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+.hero-visual{position:relative;border-radius:4px;overflow:hidden;border:1px solid var(--border2);
+  box-shadow:0 18px 40px -20px rgba(26,24,20,.25);aspect-ratio:3/2;}
+.hero-visual img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;}
+.hero-pulse{position:absolute;width:14px;height:14px;}
+.marker-label{position:absolute;top:-8px;left:20px;background:rgba(26,24,20,.85);color:var(--white);
+  font-family:var(--font-m);font-size:9px;line-height:1.5;padding:4px 8px;border-radius:2px;
+  white-space:nowrap;display:flex;flex-direction:column;gap:0;}
+.marker-label b{color:var(--marker-color,var(--accent));font-weight:700;font-size:9.5px;}
+.marker-label.label-left{left:auto;right:20px;text-align:right;align-items:flex-end;}
+.hero-pulse .signal-dot{width:11px;height:11px;border-radius:50%;background:var(--marker-color,var(--accent));position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--marker-color,var(--accent));z-index:2;}
+.hero-pulse .signal-ring{position:absolute;top:50%;left:50%;width:11px;height:11px;border-radius:50%;
+  border:1.5px solid var(--marker-color,var(--accent));transform:translate(-50%,-50%);opacity:0;animation:ringOut 3.2s ease-out infinite;}
+.hero-pulse .signal-ring:nth-child(2){animation-delay:1.07s;}
+.hero-pulse .signal-ring:nth-child(3){animation-delay:2.14s;}
+@keyframes ringOut{0%{width:11px;height:11px;opacity:.85;}100%{width:130px;height:130px;opacity:0;}}
+.hero-visual-tag{position:absolute;bottom:10px;left:10px;background:rgba(26,24,20,.78);color:var(--white);
+  font-family:var(--font-m);font-size:9.5px;letter-spacing:2px;padding:5px 9px;border-radius:2px;}
+@media(prefers-reduced-motion:reduce){.hero-pulse .signal-ring{animation:none;opacity:.3;width:70px;height:70px;}}
+
+/* ── SECTION SHELL ───────────────────────────────────────────── */
+section{padding:72px 0;}
+#como-funciona{border-top:1px solid var(--border);}
+.section-head{margin-bottom:44px;text-align:center;}
+.hero h1,h2,h3,h4,.hero p.lead,.section-lead{text-transform:uppercase;}
+h2{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:12px;}
+.section-lead{color:var(--ink2);font-size:17px;line-height:1.65;max-width:48ch;margin:0 auto;}
+
+/* ── ICONS ───────────────────────────────────────────────────── */
+.icon{width:44px;height:44px;stroke:var(--accent);stroke-width:1.5;flex-shrink:0;display:block;margin:0 auto 16px;}
+
+/* ── HOW IT WORKS ────────────────────────────────────────────── */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+.step{border-top:2px solid var(--ink);padding-top:16px;text-align:center;}
+.step-num{font-family:var(--font-m);font-size:12px;color:var(--accent);margin-bottom:10px;}
+.step h3{font-size:16px;font-weight:700;margin-bottom:8px;}
+.step p{font-size:13.5px;color:var(--ink2);line-height:1.7;}
+
+/* ── TRUST STRIP (misma superficie que "Cómo funciona") ────────── */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-top:52px;
+  padding-top:36px;border-top:1px solid var(--border);}
+.trust-item{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;}
+.trust-item .icon{stroke:var(--ink);}
+.trust-item h4{font-size:13.5px;font-weight:700;color:var(--ink);}
+.trust-item p{font-size:12px;color:var(--ink2);line-height:1.6;}
+
+/* ── ORGANIZERS ──────────────────────────────────────────────── */
+.organizers{background:var(--ink);color:var(--white);padding:88px 0;}
+.organizers h2{color:var(--white);}
+.organizers .section-lead{color:rgba(255,255,255,.6);}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-w);
+  border:1px solid var(--border-w);margin-bottom:40px;}
+.pillar{background:var(--ink);padding:26px 24px;}
+.pillar .icon{stroke:var(--accent);}
+.pillar h3{font-size:15px;font-weight:700;margin-bottom:10px;color:var(--white);}
+.pillar p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7;}
+.pilot-note{background:rgba(255,255,255,.05);border:1px solid var(--border-w);border-radius:3px;padding:24px 26px;display:flex;gap:16px;
+  align-items:flex-start;flex-wrap:wrap;justify-content:space-between;}
+.pilot-note .txt{max-width:52ch;}
+.pilot-tag{font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;color:var(--accent);margin-bottom:6px;}
+.pilot-note h4{font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.pilot-note p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.65;}
+
+/* ── CONTACT ─────────────────────────────────────────────────── */
+.contact .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:start;}
+.contact p{color:var(--ink2);font-size:14.5px;max-width:44ch;line-height:1.7;margin-bottom:24px;}
+.contact-card{background:var(--white);border:1.5px solid var(--border2);padding:26px;}
+.contact-card .lbl{font-family:var(--font-m);font-size:10px;letter-spacing:2px;color:var(--ink3);margin-bottom:6px;}
+.contact-card .val{font-size:16px;font-weight:700;margin-bottom:18px;}
+.contact-card a.mail{color:var(--accent);text-decoration:none;font-weight:700;}
+.contact-card a.mail:hover{color:var(--acc2);}
+
+footer{border-top:1px solid var(--border);padding:22px 0;}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.foot-note{font-family:var(--font-m);font-size:10.5px;color:var(--ink3);letter-spacing:.5px;}
+.foot-tag{font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;color:var(--ink3);
+  border:1px solid var(--border2);padding:4px 9px;border-radius:2px;}
+
+
+/* ── TRY IT (demo + QR) ───────────────────────────────────────── */
+.tryit{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.tryit .wrap{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;align-items:center;}
+.tryit h2{text-align:left;}
+.tryit .section-lead{margin:0 0 22px;max-width:44ch;text-align:left;}
+.try-list{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:30px;}
+.try-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--ink);line-height:1.5;}
+.try-list svg{width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;margin-top:1px;}
+.try-visual{display:flex;gap:22px;align-items:center;justify-content:center;}
+.phone{width:218px;flex:0 0 auto;background:var(--ink);border-radius:30px;padding:9px;box-shadow:0 24px 44px -22px rgba(26,24,20,.45);}
+.phone img{width:100%;aspect-ratio:1/2;object-fit:cover;object-position:top;border-radius:22px;background:var(--bg);}
+.phone.p2{margin-top:44px;}
+.qr-card{background:var(--white);border:1.5px solid var(--border2);padding:16px 16px 14px;text-align:center;width:176px;flex:0 0 auto;}
+.qr-card svg{width:144px;height:144px;margin:0 auto 10px;display:block;}
+.qr-card .scan{font-family:var(--font-m);font-size:10px;letter-spacing:1.4px;color:var(--ink2);text-transform:uppercase;line-height:1.5;}
+.qr-card .sim{font-size:11px;color:var(--ink3);margin-top:6px;}
+@media(max-width:860px){
+  .tryit .wrap{grid-template-columns:1fr;gap:36px;}
+  .try-visual{gap:14px;}
+  .phone{width:150px;border-radius:24px;padding:7px;}
+  .phone img{border-radius:18px;}
+  .phone.p2{margin-top:30px;}
+  .qr-card{display:none;}
+}
+footer .foot-links{display:flex;gap:18px;font-family:var(--font-m);font-size:10.5px;letter-spacing:1px;}
+footer .foot-links a{color:var(--ink2);text-decoration:none;}
+footer .foot-links a:hover{color:var(--accent);}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media(max-width:860px){
+  .section-lead{max-width:100%;}
+  .trust-grid{grid-template-columns:repeat(2,1fr);row-gap:26px;}
+  .hero .wrap{grid-template-columns:1fr;gap:36px;}
+  .hero{padding:48px 0 52px;}
+  .hero-pulse .signal-dot,.hero-pulse .signal-ring{width:9px;height:9px;}
+  @keyframes ringOut{0%{width:9px;height:9px;opacity:.85;}100%{width:100px;height:100px;opacity:0;}}
+  .hero h1{font-size:32px;}
+  .steps{grid-template-columns:1fr;gap:28px;}
+  .pillars{grid-template-columns:1fr;}
+  .contact .wrap{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .nav-cta{display:none;}
+  .nav-right .lang-dropdown{display:none;}
+  .burger{display:flex;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Find <span>Y</span> Crew</div>
+    <div class="nav-links">
+      <a href="#como-funciona" data-i18n="nav.como">Cómo funciona</a>
+      <a href="#organizadores" data-i18n="nav.org">Organizadores</a>
+      <a href="#contacto" data-i18n="nav.contacto">Contacto</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang-dropdown" data-lang-dropdown>
+        <button class="lang-toggle" data-lang-current aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">🇪🇸</button>
+        <div class="lang-menu" data-lang-menu>
+          <button type="button" data-lang-option="es" aria-label="Español">🇪🇸</button>
+          <button type="button" data-lang-option="en" aria-label="English">🇬🇧</button>
+          <button type="button" data-lang-option="da" aria-label="Dansk">🇩🇰</button>
+        </div>
+      </div>
+      <a class="nav-cta" href="app/?demo=1" data-app-demo data-i18n="cta.demo">Probar demo</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-panel" id="mobilePanel">
+    <a href="#como-funciona" data-i18n="nav.como">Cómo funciona</a>
+    <a href="#organizadores" data-i18n="nav.org">Organizadores</a>
+    <a href="app/?demo=1" data-app-demo data-i18n="cta.demo">Probar demo</a>
+    <div class="lang-dropdown" data-lang-dropdown>
+      <button class="lang-toggle" data-lang-current aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">🇪🇸</button>
+      <div class="lang-menu" data-lang-menu>
+        <button type="button" data-lang-option="es" aria-label="Español">🇪🇸</button>
+        <button type="button" data-lang-option="en" aria-label="English">🇬🇧</button>
+        <button type="button" data-lang-option="da" aria-label="Dansk">🇩🇰</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <h1 data-i18n-html="hero.h1"><span class="h1-line">Encuentra a tu gente.</span><span class="h1-line h1-line-accent">Controla tu evento.</span></h1>
+      <p class="lead" data-i18n="hero.lead">Coordinación en tiempo real para tu público, tu equipo y tu evento.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="app/?demo=1" data-app-demo data-i18n="cta.demo">Probar demo</a>
+        <a class="btn btn-ghost" href="#como-funciona" data-i18n="hero.cta2">Ver cómo funciona</a>
+      </div>
+    </div>
+    <div>
+      <div class="hero-visual">
+        <img src="assets/hero-festival.jpg" alt="Ilustración de un recinto de festival con escenarios, zona de acampada y ríos" width="1200" height="800">
+        <div class="hero-pulse" style="top:46%;left:49%;--marker-color:#3FA9E8;">
+          <div class="signal-ring"></div>
+          <div class="signal-ring"></div>
+          <div class="signal-ring"></div>
+          <div class="signal-dot"></div>
+          <div class="marker-label">
+            <b data-i18n="marker1.name">Uxue</b>
+            <span data-i18n="marker1.status">💬 Dejó un mensaje</span>
+          </div>
+        </div>
+        <div class="hero-pulse" style="top:60.5%;left:45%;--marker-color:#E8C547;">
+          <div class="signal-ring"></div>
+          <div class="signal-ring"></div>
+          <div class="signal-ring"></div>
+          <div class="signal-dot"></div>
+          <div class="marker-label">
+            <b data-i18n="marker2.name">Diego</b>
+            <span data-i18n="marker2.status">🍔 Comiendo</span>
+          </div>
+        </div>
+        <div class="hero-pulse" style="top:30%;left:66%;--marker-color:#E8639C;">
+          <div class="signal-ring"></div>
+          <div class="signal-ring"></div>
+          <div class="signal-ring"></div>
+          <div class="signal-dot"></div>
+          <div class="marker-label label-left">
+            <b data-i18n="marker3.name">Sara</b>
+            <span data-i18n="marker3.status">🥤 Comprando bebidas</span>
+          </div>
+        </div>
+        <div class="hero-visual-tag" data-i18n="signal.label">SEÑAL EN VIVO</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<section id="prueba" class="tryit">
+  <div class="wrap">
+    <div>
+      <h2 data-i18n="try.h2">Pruébalo en tu móvil</h2>
+      <p class="section-lead" data-i18n="try.lead">Escanea el código y explora un festival simulado: muévete por el mapa, mira a tu crew, deja un estado y cambia a la vista del organizador. Sin instalar nada.</p>
+      <ul class="try-list">
+        <li><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span data-i18n="try.b1">Mapa en vivo con tu crew</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span data-i18n="try.b2">Estados y puntos de encuentro</span></li>
+        <li><svg viewBox="0 0 24 24"><polyline points="4 12.5 9.5 18 20 6.5"/></svg><span data-i18n="try.b3">Vista del organizador: solo datos agregados</span></li>
+      </ul>
+      <a class="btn btn-primary" href="app/?demo=1" data-app-demo data-i18n="try.cta">Abrir la demo</a>
+    </div>
+    <div class="try-visual">
+      <div class="phone"><img data-shot="crew" src="assets/shot-crew-es.jpg" alt="" loading="lazy"></div>
+      <div class="phone p2"><img data-shot="org" src="assets/shot-org-es.jpg" alt="" loading="lazy"></div>
+      <div class="qr-card" id="qrCard">
+        <div id="qrBox" role="img" aria-label="QR"></div>
+        <div class="scan" data-i18n="try.scan">Escanea con la cámara de tu móvil</div>
+        <div class="sim" data-i18n="try.note">Datos simulados. No se guarda nada.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como-funciona">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-i18n="how.h2">Cómo funciona</h2>
+      <p class="section-lead" data-i18n="how.lead">Sin descargas pesadas ni configuración. Tres pasos y el grupo está conectado.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 6 3 12 8 18"/><polyline points="16 6 21 12 16 18"/></svg>
+        <h3 data-i18n="step1.h3">Tu perfil, tu código</h3>
+        <p data-i18n="step1.p">Elige nombre, color y avatar. Tu código se genera al momento — sin cuentas ni contraseñas.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        <h3 data-i18n="step2.h3">Mapa en vivo</h3>
+        <p data-i18n="step2.p">Añade el código de tus amigos y os veis en tiempo real, incluso con la cobertura saturada.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h11l-2.5 4L16 12H5"/></svg>
+        <h3 data-i18n="step3.h3">Puntos de encuentro</h3>
+        <p data-i18n="step3.p">Cualquiera puede fijar un punto de encuentro en el mapa y el resto del grupo lo ve al instante.</p>
+      </div>
+    </div>
+
+    <div class="trust-grid">
+      <div class="trust-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.9 2.7-6.5 6-6.5s6 2.6 6 6.5"/><path d="M17 8l4 4M21 8l-4 4"/></svg>
+        <h4 data-i18n="trust1.h4">Sin cuentas ni números guardados</h4>
+        <p data-i18n="trust1.p">Entras con un código de grupo. No pedimos tu número ni creamos un perfil permanente.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.2A10.6 10.6 0 0 1 12 5c5 0 9 4.5 10 7-0.5 1.1-1.4 2.5-2.7 3.7M6.6 6.6C4.4 8 2.9 10 2 12c1 2.5 5 7 10 7 1.4 0 2.7-.3 3.9-.8"/><path d="M9.5 9.8a3 3 0 0 0 4.2 4.2"/></svg>
+        <h4 data-i18n="trust2.h4">Te ocultas cuando quieras</h4>
+        <p data-i18n="trust2.p">Un botón para dejar de compartir tu posición en cualquier momento, sin salir del mapa.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+        <h4 data-i18n="trust3.h4">Tu posición se borra al salir</h4>
+        <p data-i18n="trust3.p">Al cerrar el mapa, tu ubicación se elimina de nuestros servidores.</p>
+      </div>
+      <div class="trust-item">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.8-3 7.7-7 9-4-1.3-7-4.2-7-9V6l7-3z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <h4 data-i18n="trust4.h4">El festival no sabe quién eres</h4>
+        <p data-i18n="trust4.p">Solo tu crew te ve en el mapa. El organizador recibe estadísticas anónimas y agregadas, nunca tu nombre ni tu posición.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="organizadores" class="organizers">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-i18n="org.h2">Para organizadores</h2>
+      <p class="section-lead" data-i18n="org.lead">Menos gente perdida, menos carga en seguridad, más control sobre lo que pasa en tu recinto.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.5 2.7-6 5.5-6s5.5 2.5 5.5 6"/><circle cx="17.5" cy="9.5" r="2.6"/><path d="M15.2 14.3c2.3.3 4.3 2.5 4.3 5.7"/></svg>
+        <h3 data-i18n="pillar1.h3">Coordinación de crew en tiempo real</h3>
+        <p data-i18n="pillar1.p">Grupos que se encuentran y reencuentran en un recinto masivo sin depender de una cobertura saturada.</p>
+      </div>
+      <div class="pillar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+        <h3 data-i18n="pillar2.h3">Puntos de encuentro dinámicos</h3>
+        <p data-i18n="pillar2.p">Zonas de referencia claras que reducen las aglomeraciones espontáneas en accesos y servicios.</p>
+      </div>
+      <div class="pillar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.8-3 7.7-7 9-4-1.3-7-4.2-7-9V6l7-3z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <h3 data-i18n="pillar3.h3">Tranquilidad para el festival</h3>
+        <p data-i18n="pillar3.p">Menos personas pidiendo ayuda a seguridad, menos carga en megafonía y objetos perdidos.</p>
+      </div>
+    </div>
+    <div class="pilot-note">
+      <div class="txt">
+        <div class="pilot-tag" data-i18n="pilot.tag">PRÓXIMAMENTE</div>
+        <h4 data-i18n="pilot.h4">Coordinación de equipos y voluntarios</h4>
+        <p data-i18n="pilot.p">Visibilidad y control total sobre staff y voluntarios durante tu evento. Los primeros
+           festivales en sumarse ayudan a darle forma antes del lanzamiento.</p>
+      </div>
+      <a class="btn btn-primary" href="#contacto" data-i18n="pilot.cta">Acceso anticipado</a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="contact">
+  <div class="wrap">
+    <div>
+      <h2 data-i18n="contact.h2">Solicita una demo</h2>
+      <p data-i18n="contact.p">Prototipo en fase de prueba. Si organizas un festival o evento masivo y quieres verlo en vivo,
+         escríbenos y lo mostramos en directo.</p>
+    </div>
+    <div class="contact-card">
+      <div class="lbl" data-i18n="contact.lbl1">CONTACTO</div>
+      <div class="val"><a class="mail" href="mailto:hola@findycrew.com">hola@findycrew.com</a></div>
+      <div class="lbl" data-i18n="contact.lbl2">RESPUESTA</div>
+      <div class="val" style="margin-bottom:0;" data-i18n="contact.val2">En 24–48h</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-note">FIND Y CREW · YM ENTERPRISE</div>
+    <div class="foot-links"><a href="app/?demo=1" data-app-demo data-i18n="try.cta">Abrir la demo</a><a href="app/" data-app-real data-i18n="footer.app">Abrir app</a></div>
+    <div class="foot-tag" data-i18n="footer.tag">PROTOTIPO</div>
+  </div>
+</footer>
+
+<script>
+var FYCQR=(()=>{var v=(t,e)=>()=>{try{return e||t((e={exports:{}}).exports,e),e.exports}catch(n){throw e=0,n}};var N=v((dt,G)=>{G.exports={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8}});var X=v((Bt,U)=>{var ut=N();function K(t){this.mode=ut.MODE_8BIT_BYTE,this.data=t}K.prototype={getLength:function(){return this.data.length},write:function(t){for(var e=0;e<this.data.length;e++)t.put(this.data.charCodeAt(e),8)}};U.exports=K});var I=v((Lt,x)=>{var E={glog:function(t){if(t<1)throw new Error("glog("+t+")");return E.LOG_TABLE[t]},gexp:function(t){for(;t<0;)t+=255;for(;t>=256;)t-=255;return E.EXP_TABLE[t]},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)};for(h=0;h<8;h++)E.EXP_TABLE[h]=1<<h;var h;for(h=8;h<256;h++)E.EXP_TABLE[h]=E.EXP_TABLE[h-4]^E.EXP_TABLE[h-5]^E.EXP_TABLE[h-6]^E.EXP_TABLE[h-8];var h;for(h=0;h<255;h++)E.LOG_TABLE[E.EXP_TABLE[h]]=h;var h;x.exports=E});var b=v((At,Y)=>{var A=I();function _(t,e){if(t.length===void 0)throw new Error(t.length+"/"+e);for(var n=0;n<t.length&&t[n]===0;)n++;this.num=new Array(t.length-n+e);for(var r=0;r<t.length-n;r++)this.num[r]=t[r+n]}_.prototype={get:function(t){return this.num[t]},getLength:function(){return this.num.length},multiply:function(t){for(var e=new Array(this.getLength()+t.getLength()-1),n=0;n<this.getLength();n++)for(var r=0;r<t.getLength();r++)e[n+r]^=A.gexp(A.glog(this.get(n))+A.glog(t.get(r)));return new _(e,0)},mod:function(t){if(this.getLength()-t.getLength()<0)return this;for(var e=A.glog(this.get(0))-A.glog(t.get(0)),n=new Array(this.getLength()),r=0;r<this.getLength();r++)n[r]=this.get(r);for(var i=0;i<t.getLength();i++)n[i]^=A.gexp(A.glog(t.get(i))+e);return new _(n,0).mod(t)}};Y.exports=_});var F=v((pt,J)=>{J.exports={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7}});var Z=v((Pt,W)=>{var g=N(),V=b(),ht=I(),d=F(),f={PATTERN_POSITION_TABLE:[[],[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,134],[6,34,60,86,112,138],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],G15:1335,G18:7973,G15_MASK:21522,getBCHTypeInfo:function(t){for(var e=t<<10;f.getBCHDigit(e)-f.getBCHDigit(f.G15)>=0;)e^=f.G15<<f.getBCHDigit(e)-f.getBCHDigit(f.G15);return(t<<10|e)^f.G15_MASK},getBCHTypeNumber:function(t){for(var e=t<<12;f.getBCHDigit(e)-f.getBCHDigit(f.G18)>=0;)e^=f.G18<<f.getBCHDigit(e)-f.getBCHDigit(f.G18);return t<<12|e},getBCHDigit:function(t){for(var e=0;t!==0;)e++,t>>>=1;return e},getPatternPosition:function(t){return f.PATTERN_POSITION_TABLE[t-1]},getMask:function(t,e,n){switch(t){case d.PATTERN000:return(e+n)%2===0;case d.PATTERN001:return e%2===0;case d.PATTERN010:return n%3===0;case d.PATTERN011:return(e+n)%3===0;case d.PATTERN100:return(Math.floor(e/2)+Math.floor(n/3))%2===0;case d.PATTERN101:return e*n%2+e*n%3===0;case d.PATTERN110:return(e*n%2+e*n%3)%2===0;case d.PATTERN111:return(e*n%3+(e+n)%2)%2===0;default:throw new Error("bad maskPattern:"+t)}},getErrorCorrectPolynomial:function(t){for(var e=new V([1],0),n=0;n<t;n++)e=e.multiply(new V([1,ht.gexp(n)],0));return e},getLengthInBits:function(t,e){if(1<=e&&e<10)switch(t){case g.MODE_NUMBER:return 10;case g.MODE_ALPHA_NUM:return 9;case g.MODE_8BIT_BYTE:return 8;case g.MODE_KANJI:return 8;default:throw new Error("mode:"+t)}else if(e<27)switch(t){case g.MODE_NUMBER:return 12;case g.MODE_ALPHA_NUM:return 11;case g.MODE_8BIT_BYTE:return 16;case g.MODE_KANJI:return 10;default:throw new Error("mode:"+t)}else if(e<41)switch(t){case g.MODE_NUMBER:return 14;case g.MODE_ALPHA_NUM:return 13;case g.MODE_8BIT_BYTE:return 16;case g.MODE_KANJI:return 12;default:throw new Error("mode:"+t)}else throw new Error("type:"+e)},getLostPoint:function(t){var e=t.getModuleCount(),n=0,r=0,i=0;for(r=0;r<e;r++)for(i=0;i<e;i++){for(var a=0,o=t.isDark(r,i),s=-1;s<=1;s++)if(!(r+s<0||e<=r+s))for(var u=-1;u<=1;u++)i+u<0||e<=i+u||s===0&&u===0||o===t.isDark(r+s,i+u)&&a++;a>5&&(n+=3+a-5)}for(r=0;r<e-1;r++)for(i=0;i<e-1;i++){var l=0;t.isDark(r,i)&&l++,t.isDark(r+1,i)&&l++,t.isDark(r,i+1)&&l++,t.isDark(r+1,i+1)&&l++,(l===0||l===4)&&(n+=3)}for(r=0;r<e;r++)for(i=0;i<e-6;i++)t.isDark(r,i)&&!t.isDark(r,i+1)&&t.isDark(r,i+2)&&t.isDark(r,i+3)&&t.isDark(r,i+4)&&!t.isDark(r,i+5)&&t.isDark(r,i+6)&&(n+=40);for(i=0;i<e;i++)for(r=0;r<e-6;r++)t.isDark(r,i)&&!t.isDark(r+1,i)&&t.isDark(r+2,i)&&t.isDark(r+3,i)&&t.isDark(r+4,i)&&!t.isDark(r+5,i)&&t.isDark(r+6,i)&&(n+=40);var L=0;for(i=0;i<e;i++)for(r=0;r<e;r++)t.isDark(r,i)&&L++;var p=Math.abs(100*L/e/e-50)/5;return n+=p*10,n}};W.exports=f});var O=v((ct,$)=>{$.exports={L:1,M:0,Q:3,H:2}});var q=v((Dt,z)=>{var w=O();function m(t,e){this.totalCount=t,this.dataCount=e}m.RS_BLOCK_TABLE=[[1,26,19],[1,26,16],[1,26,13],[1,26,9],[1,44,34],[1,44,28],[1,44,22],[1,44,16],[1,70,55],[1,70,44],[2,35,17],[2,35,13],[1,100,80],[2,50,32],[2,50,24],[4,25,9],[1,134,108],[2,67,43],[2,33,15,2,34,16],[2,33,11,2,34,12],[2,86,68],[4,43,27],[4,43,19],[4,43,15],[2,98,78],[4,49,31],[2,32,14,4,33,15],[4,39,13,1,40,14],[2,121,97],[2,60,38,2,61,39],[4,40,18,2,41,19],[4,40,14,2,41,15],[2,146,116],[3,58,36,2,59,37],[4,36,16,4,37,17],[4,36,12,4,37,13],[2,86,68,2,87,69],[4,69,43,1,70,44],[6,43,19,2,44,20],[6,43,15,2,44,16],[4,101,81],[1,80,50,4,81,51],[4,50,22,4,51,23],[3,36,12,8,37,13],[2,116,92,2,117,93],[6,58,36,2,59,37],[4,46,20,6,47,21],[7,42,14,4,43,15],[4,133,107],[8,59,37,1,60,38],[8,44,20,4,45,21],[12,33,11,4,34,12],[3,145,115,1,146,116],[4,64,40,5,65,41],[11,36,16,5,37,17],[11,36,12,5,37,13],[5,109,87,1,110,88],[5,65,41,5,66,42],[5,54,24,7,55,25],[11,36,12],[5,122,98,1,123,99],[7,73,45,3,74,46],[15,43,19,2,44,20],[3,45,15,13,46,16],[1,135,107,5,136,108],[10,74,46,1,75,47],[1,50,22,15,51,23],[2,42,14,17,43,15],[5,150,120,1,151,121],[9,69,43,4,70,44],[17,50,22,1,51,23],[2,42,14,19,43,15],[3,141,113,4,142,114],[3,70,44,11,71,45],[17,47,21,4,48,22],[9,39,13,16,40,14],[3,135,107,5,136,108],[3,67,41,13,68,42],[15,54,24,5,55,25],[15,43,15,10,44,16],[4,144,116,4,145,117],[17,68,42],[17,50,22,6,51,23],[19,46,16,6,47,17],[2,139,111,7,140,112],[17,74,46],[7,54,24,16,55,25],[34,37,13],[4,151,121,5,152,122],[4,75,47,14,76,48],[11,54,24,14,55,25],[16,45,15,14,46,16],[6,147,117,4,148,118],[6,73,45,14,74,46],[11,54,24,16,55,25],[30,46,16,2,47,17],[8,132,106,4,133,107],[8,75,47,13,76,48],[7,54,24,22,55,25],[22,45,15,13,46,16],[10,142,114,2,143,115],[19,74,46,4,75,47],[28,50,22,6,51,23],[33,46,16,4,47,17],[8,152,122,4,153,123],[22,73,45,3,74,46],[8,53,23,26,54,24],[12,45,15,28,46,16],[3,147,117,10,148,118],[3,73,45,23,74,46],[4,54,24,31,55,25],[11,45,15,31,46,16],[7,146,116,7,147,117],[21,73,45,7,74,46],[1,53,23,37,54,24],[19,45,15,26,46,16],[5,145,115,10,146,116],[19,75,47,10,76,48],[15,54,24,25,55,25],[23,45,15,25,46,16],[13,145,115,3,146,116],[2,74,46,29,75,47],[42,54,24,1,55,25],[23,45,15,28,46,16],[17,145,115],[10,74,46,23,75,47],[10,54,24,35,55,25],[19,45,15,35,46,16],[17,145,115,1,146,116],[14,74,46,21,75,47],[29,54,24,19,55,25],[11,45,15,46,46,16],[13,145,115,6,146,116],[14,74,46,23,75,47],[44,54,24,7,55,25],[59,46,16,1,47,17],[12,151,121,7,152,122],[12,75,47,26,76,48],[39,54,24,14,55,25],[22,45,15,41,46,16],[6,151,121,14,152,122],[6,75,47,34,76,48],[46,54,24,10,55,25],[2,45,15,64,46,16],[17,152,122,4,153,123],[29,74,46,14,75,47],[49,54,24,10,55,25],[24,45,15,46,46,16],[4,152,122,18,153,123],[13,74,46,32,75,47],[48,54,24,14,55,25],[42,45,15,32,46,16],[20,147,117,4,148,118],[40,75,47,7,76,48],[43,54,24,22,55,25],[10,45,15,67,46,16],[19,148,118,6,149,119],[18,75,47,31,76,48],[34,54,24,34,55,25],[20,45,15,61,46,16]];m.getRSBlocks=function(t,e){var n=m.getRsBlockTable(t,e);if(n===void 0)throw new Error("bad rs block @ typeNumber:"+t+"/errorCorrectLevel:"+e);for(var r=n.length/3,i=[],a=0;a<r;a++)for(var o=n[a*3+0],s=n[a*3+1],u=n[a*3+2],l=0;l<o;l++)i.push(new m(s,u));return i};m.getRsBlockTable=function(t,e){switch(e){case w.L:return m.RS_BLOCK_TABLE[(t-1)*4+0];case w.M:return m.RS_BLOCK_TABLE[(t-1)*4+1];case w.Q:return m.RS_BLOCK_TABLE[(t-1)*4+2];case w.H:return m.RS_BLOCK_TABLE[(t-1)*4+3];default:return}};z.exports=m});var et=v((Mt,tt)=>{function j(){this.buffer=[],this.length=0}j.prototype={get:function(t){var e=Math.floor(t/8);return(this.buffer[e]>>>7-t%8&1)==1},put:function(t,e){for(var n=0;n<e;n++)this.putBit((t>>>e-n-1&1)==1)},getLengthInBits:function(){return this.length},putBit:function(t){var e=Math.floor(this.length/8);this.buffer.length<=e&&this.buffer.push(0),t&&(this.buffer[e]|=128>>>this.length%8),this.length++}};tt.exports=j});var at=v((Rt,it)=>{var ft=X(),B=Z(),lt=b(),rt=q(),nt=et();function T(t,e){this.typeNumber=t,this.errorCorrectLevel=e,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}T.prototype={addData:function(t){var e=new ft(t);this.dataList.push(e),this.dataCache=null},isDark:function(t,e){if(t<0||this.moduleCount<=t||e<0||this.moduleCount<=e)throw new Error(t+","+e);return this.modules[t][e]},getModuleCount:function(){return this.moduleCount},make:function(){if(this.typeNumber<1){var t=1;for(t=1;t<40;t++){for(var e=rt.getRSBlocks(t,this.errorCorrectLevel),n=new nt,r=0,i=0;i<e.length;i++)r+=e[i].dataCount;for(var a=0;a<this.dataList.length;a++){var o=this.dataList[a];n.put(o.mode,4),n.put(o.getLength(),B.getLengthInBits(o.mode,t)),o.write(n)}if(n.getLengthInBits()<=r*8)break}this.typeNumber=t}this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(t,e){this.moduleCount=this.typeNumber*4+17,this.modules=new Array(this.moduleCount);for(var n=0;n<this.moduleCount;n++){this.modules[n]=new Array(this.moduleCount);for(var r=0;r<this.moduleCount;r++)this.modules[n][r]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(t,e),this.typeNumber>=7&&this.setupTypeNumber(t),this.dataCache===null&&(this.dataCache=T.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,e)},setupPositionProbePattern:function(t,e){for(var n=-1;n<=7;n++)if(!(t+n<=-1||this.moduleCount<=t+n))for(var r=-1;r<=7;r++)e+r<=-1||this.moduleCount<=e+r||(0<=n&&n<=6&&(r===0||r===6)||0<=r&&r<=6&&(n===0||n===6)||2<=n&&n<=4&&2<=r&&r<=4?this.modules[t+n][e+r]=!0:this.modules[t+n][e+r]=!1)},getBestMaskPattern:function(){for(var t=0,e=0,n=0;n<8;n++){this.makeImpl(!0,n);var r=B.getLostPoint(this);(n===0||t>r)&&(t=r,e=n)}return e},createMovieClip:function(t,e,n){var r=t.createEmptyMovieClip(e,n),i=1;this.make();for(var a=0;a<this.modules.length;a++)for(var o=a*i,s=0;s<this.modules[a].length;s++){var u=s*i,l=this.modules[a][s];l&&(r.beginFill(0,100),r.moveTo(u,o),r.lineTo(u+i,o),r.lineTo(u+i,o+i),r.lineTo(u,o+i),r.endFill())}return r},setupTimingPattern:function(){for(var t=8;t<this.moduleCount-8;t++)this.modules[t][6]===null&&(this.modules[t][6]=t%2===0);for(var e=8;e<this.moduleCount-8;e++)this.modules[6][e]===null&&(this.modules[6][e]=e%2===0)},setupPositionAdjustPattern:function(){for(var t=B.getPatternPosition(this.typeNumber),e=0;e<t.length;e++)for(var n=0;n<t.length;n++){var r=t[e],i=t[n];if(this.modules[r][i]===null)for(var a=-2;a<=2;a++)for(var o=-2;o<=2;o++)Math.abs(a)===2||Math.abs(o)===2||a===0&&o===0?this.modules[r+a][i+o]=!0:this.modules[r+a][i+o]=!1}},setupTypeNumber:function(t){for(var e=B.getBCHTypeNumber(this.typeNumber),n,r=0;r<18;r++)n=!t&&(e>>r&1)===1,this.modules[Math.floor(r/3)][r%3+this.moduleCount-8-3]=n;for(var i=0;i<18;i++)n=!t&&(e>>i&1)===1,this.modules[i%3+this.moduleCount-8-3][Math.floor(i/3)]=n},setupTypeInfo:function(t,e){for(var n=this.errorCorrectLevel<<3|e,r=B.getBCHTypeInfo(n),i,a=0;a<15;a++)i=!t&&(r>>a&1)===1,a<6?this.modules[a][8]=i:a<8?this.modules[a+1][8]=i:this.modules[this.moduleCount-15+a][8]=i;for(var o=0;o<15;o++)i=!t&&(r>>o&1)===1,o<8?this.modules[8][this.moduleCount-o-1]=i:o<9?this.modules[8][15-o-1+1]=i:this.modules[8][15-o-1]=i;this.modules[this.moduleCount-8][8]=!t},mapData:function(t,e){for(var n=-1,r=this.moduleCount-1,i=7,a=0,o=this.moduleCount-1;o>0;o-=2)for(o===6&&o--;;){for(var s=0;s<2;s++)if(this.modules[r][o-s]===null){var u=!1;a<t.length&&(u=(t[a]>>>i&1)===1);var l=B.getMask(e,r,o-s);l&&(u=!u),this.modules[r][o-s]=u,i--,i===-1&&(a++,i=7)}if(r+=n,r<0||this.moduleCount<=r){r-=n,n=-n;break}}}};T.PAD0=236;T.PAD1=17;T.createData=function(t,e,n){for(var r=rt.getRSBlocks(t,e),i=new nt,a=0;a<n.length;a++){var o=n[a];i.put(o.mode,4),i.put(o.getLength(),B.getLengthInBits(o.mode,t)),o.write(i)}for(var s=0,u=0;u<r.length;u++)s+=r[u].dataCount;if(i.getLengthInBits()>s*8)throw new Error("code length overflow. ("+i.getLengthInBits()+">"+s*8+")");for(i.getLengthInBits()+4<=s*8&&i.put(0,4);i.getLengthInBits()%8!==0;)i.putBit(!1);for(;!(i.getLengthInBits()>=s*8||(i.put(T.PAD0,8),i.getLengthInBits()>=s*8));)i.put(T.PAD1,8);return T.createBytes(i,r)};T.createBytes=function(t,e){for(var n=0,r=0,i=0,a=new Array(e.length),o=new Array(e.length),s=0;s<e.length;s++){var u=e[s].dataCount,l=e[s].totalCount-u;r=Math.max(r,u),i=Math.max(i,l),a[s]=new Array(u);for(var L=0;L<a[s].length;L++)a[s][L]=255&t.buffer[L+n];n+=u;var p=B.getErrorCorrectPolynomial(l),st=new lt(a[s],p.getLength()-1),y=st.mod(p);o[s]=new Array(p.getLength()-1);for(var P=0;P<o[s].length;P++){var Q=P+y.getLength()-o[s].length;o[s][P]=Q>=0?y.get(Q):0}}for(var H=0,C=0;C<e.length;C++)H+=e[C].totalCount;for(var k=new Array(H),S=0,c=0;c<r;c++)for(var D=0;D<e.length;D++)c<a[D].length&&(k[S++]=a[D][c]);for(var M=0;M<i;M++)for(var R=0;R<e.length;R++)M<o[R].length&&(k[S++]=o[R][M]);return k};it.exports=T});var mt=v((_t,ot)=>{var gt=at(),vt=O();function Et(t,e){for(let n=2;n<=20;n++)try{let r=new gt(n,e||vt.M);r.addData(t),r.make();let i=r.getModuleCount(),a=[];for(let o=0;o<i;o++){let s=[];for(let u=0;u<i;u++)s.push(r.isDark(o,u));a.push(s)}return a}catch{}throw new Error("QR: text too long")}ot.exports={matrix:Et}});return mt();})();
+
+</script>
+<script>
+const translations = {
+  'nav.como':   { es:'Cómo funciona', en:'How it works', da:'Sådan fungerer det' },
+  'nav.org':    { es:'Organizadores', en:'Organizers', da:'Arrangører' },
+  'nav.contacto':{ es:'Contacto', en:'Contact', da:'Kontakt' },
+  'cta.demo':   { es:'Probar demo', en:'Try the demo', da:'Prøv demoen' },
+  'hero.h1':    { es:'<span class="h1-line">Encuentra a tu gente.</span><span class="h1-line h1-line-accent">Controla tu evento.</span>',
+                  en:'<span class="h1-line">Find your crew.</span><span class="h1-line h1-line-accent">Control your event.</span>',
+                  da:'<span class="h1-line">Find din gruppe.</span><span class="h1-line h1-line-accent">Styr dit event.</span>' },
+  'hero.lead':  { es:'Coordinación en tiempo real para tu público, tu equipo y tu evento.',
+                  en:'Real-time coordination for your public, your team, and your event.',
+                  da:'Koordinering i realtid for dit publikum, dit team og dit event.' },
+  'hero.cta2':  { es:'Ver cómo funciona', en:'See how it works', da:'Se hvordan det virker' },
+  'signal.label':{ es:'SEÑAL EN VIVO', en:'LIVE SIGNAL', da:'LIVE SIGNAL' },
+  'marker1.name':{ es:'Uxue', en:'Uxue', da:'Uxue' },
+  'marker1.status':{ es:'💬 Dejó un mensaje', en:'💬 Left a message', da:'💬 Efterlod en besked' },
+  'marker2.name':{ es:'Diego', en:'Diego', da:'Diego' },
+  'marker2.status':{ es:'🍔 Comiendo', en:'🍔 Eating', da:'🍔 Spiser' },
+  'marker3.name':{ es:'Sara', en:'Sara', da:'Sara' },
+  'marker3.status':{ es:'🥤 Comprando bebidas', en:'🥤 Buying drinks', da:'🥤 Køber drikkevarer' },
+  'how.h2':     { es:'Cómo funciona', en:'How it works', da:'Sådan fungerer det' },
+  'how.lead':   { es:'Sin descargas pesadas ni configuración. Tres pasos y el grupo está conectado.',
+                  en:'No heavy downloads, no setup. Three steps and the group is connected.',
+                  da:'Ingen tunge downloads, ingen opsætning. Tre trin, og gruppen er forbundet.' },
+  'step1.h3':   { es:'Tu perfil, tu código', en:'Your profile, your code', da:'Din profil, din kode' },
+  'step1.p':    { es:'Elige nombre, color y avatar. Tu código se genera al momento — sin cuentas ni contraseñas.',
+                  en:'Pick a name, color, and avatar. Your code is generated instantly — no accounts, no passwords.',
+                  da:'Vælg navn, farve og avatar. Din kode genereres med det samme — ingen konti, ingen adgangskoder.' },
+  'step2.h3':   { es:'Mapa en vivo', en:'Live map', da:'Live-kort' },
+  'step2.p':    { es:'Añade el código de tus amigos y os veis en tiempo real, incluso con la cobertura saturada.',
+                  en:"Add your friends' codes and see each other in real time, even when coverage is saturated.",
+                  da:'Tilføj dine venners koder, og I ses i realtid — selv når dækningen er overbelastet.' },
+  'step3.h3':   { es:'Puntos de encuentro', en:'Meeting points', da:'Mødepunkter' },
+  'step3.p':    { es:'Cualquiera puede fijar un punto de encuentro en el mapa y el resto del grupo lo ve al instante.',
+                  en:'Anyone can drop a meeting point on the map and the rest of the group sees it instantly.',
+                  da:'Alle kan sætte et mødepunkt på kortet, og resten af gruppen ser det med det samme.' },
+  'trust1.h4':  { es:'Sin cuentas ni números guardados', en:'No accounts, no numbers saved', da:'Ingen konti eller gemte numre' },
+  'trust1.p':   { es:'Entras con un código de grupo. No pedimos tu número ni creamos un perfil permanente.',
+                  en:"You join with a group code. We don't ask for your number or create a permanent profile.",
+                  da:'Du deltager med en gruppekode. Vi beder ikke om dit nummer eller opretter en permanent profil.' },
+  'trust2.h4':  { es:'Te ocultas cuando quieras', en:'Go invisible whenever you want', da:'Bliv usynlig når du vil' },
+  'trust2.p':   { es:'Un botón para dejar de compartir tu posición en cualquier momento, sin salir del mapa.',
+                  en:'One button stops sharing your position at any time, without leaving the map.',
+                  da:'Én knap stopper deling af din placering når som helst, uden at forlade kortet.' },
+  'trust3.h4':  { es:'Tu posición se borra al salir', en:'Your position is deleted when you leave', da:'Din position slettes, når du forlader' },
+  'trust3.p':   { es:'Al cerrar el mapa, tu ubicación se elimina de nuestros servidores.',
+                  en:'When you close the map, your location is removed from our servers.',
+                  da:'Når du lukker kortet, fjernes din placering fra vores servere.' },
+  'trust4.h4':  { es:'El festival no sabe quién eres', en:"The festival doesn't know who you are", da:'Festivalen ved ikke, hvem du er' },
+  'trust4.p':   { es:'Solo tu crew te ve en el mapa. El organizador recibe estadísticas anónimas y agregadas, nunca tu nombre ni tu posición.',
+                  en:'Only your crew sees you on the map. The organizer gets anonymous, aggregated statistics, never your name or your position.',
+                  da:'Kun dit crew ser dig på kortet. Arrangøren får anonyme, samlede statistikker, aldrig dit navn eller din position.' },
+  'org.h2':     { es:'Para organizadores', en:'For organizers', da:'Til arrangører' },
+  'org.lead':   { es:'Menos gente perdida, menos carga en seguridad, más control sobre lo que pasa en tu recinto.',
+                  en:'Fewer lost attendees, less load on security, more control over what happens on your site.',
+                  da:'Færre bortkomne gæster, mindre belastning på sikkerheden og mere kontrol over dit område.' },
+  'pillar1.h3': { es:'Coordinación de crew en tiempo real', en:'Real-time crew coordination', da:'Teamkoordinering i realtid' },
+  'pillar1.p':  { es:'Grupos que se encuentran y reencuentran en un recinto masivo sin depender de una cobertura saturada.',
+                  en:'Groups that find and re-find each other in a massive venue without relying on saturated coverage.',
+                  da:'Grupper der finder og genfinder hinanden på et stort område uden at være afhængige af overbelastet dækning.' },
+  'pillar2.h3': { es:'Puntos de encuentro dinámicos', en:'Dynamic meeting points', da:'Dynamiske mødepunkter' },
+  'pillar2.p':  { es:'Zonas de referencia claras que reducen las aglomeraciones espontáneas en accesos y servicios.',
+                  en:'Clear reference zones that reduce spontaneous crowding at entrances and services.',
+                  da:'Klare referencezoner, der reducerer spontane opstuvninger ved indgange og faciliteter.' },
+  'pillar3.h3': { es:'Tranquilidad para el festival', en:'Peace of mind for the festival', da:'Ro i sindet for festivalen' },
+  'pillar3.p':  { es:'Menos personas pidiendo ayuda a seguridad, menos carga en megafonía y objetos perdidos.',
+                  en:'Fewer people asking security for help, less load on the PA system and lost-and-found.',
+                  da:'Færre personer der beder sikkerheden om hjælp, mindre belastning på højttaleranlæg og hittegods.' },
+  'pilot.tag':  { es:'PRÓXIMAMENTE', en:'COMING SOON', da:'KOMMER SNART' },
+  'pilot.h4':   { es:'Coordinación de equipos y voluntarios', en:'Team and volunteer coordination', da:'Koordinering af team og frivillige' },
+  'pilot.p':    { es:'Visibilidad y control total sobre staff y voluntarios durante tu evento. Los primeros festivales en sumarse ayudan a darle forma antes del lanzamiento.',
+                  en:"Full visibility and control over staff and volunteers during your event. The first festivals to join help shape it before launch.",
+                  da:'Fuldt overblik og kontrol over personale og frivillige under dit event. De første festivaler, der er med, hjælper med at forme det inden lancering.' },
+  'pilot.cta':  { es:'Acceso anticipado', en:'Early access', da:'Tidlig adgang' },
+  'contact.h2': { es:'Hablemos', en:"Let's talk", da:'Lad os tale' },
+  'contact.p':  { es:'Prototipo en fase de prueba. Si organizas un festival o evento masivo y quieres verlo en vivo, escríbenos y lo mostramos en directo.',
+                  en:"Prototype in testing phase. If you run a festival or large event and want to see it live, write to us and we'll show it to you.",
+                  da:'Prototype under afprøvning. Hvis du arrangerer en festival eller et stort event og vil se det live, så skriv til os, og vi viser dig det.' },
+  'contact.lbl1':{ es:'CONTACTO', en:'CONTACT', da:'KONTAKT' },
+  'contact.lbl2':{ es:'RESPUESTA', en:'RESPONSE', da:'SVARTID' },
+  'contact.val2':{ es:'En 24–48h', en:'Within 24–48h', da:'Inden for 24–48 timer' },
+  'try.h2':     { es:'Pruébalo en tu móvil', en:'Try it on your phone', da:'Prøv det på din mobil' },
+  'try.lead':   { es:'Escanea el código y explora un festival simulado: muévete por el mapa, mira a tu crew, deja un estado y cambia a la vista del organizador. Sin instalar nada.',
+                  en:'Scan the code and explore a simulated festival: move around the map, see your crew, post a status and switch to the organizer view. Nothing to install.',
+                  da:'Scan koden og udforsk en simuleret festival: bevæg dig rundt på kortet, se din crew, skriv en status og skift til arrangørvisningen. Ingen installation.' },
+  'try.b1':     { es:'Mapa en vivo con tu crew', en:'Live map with your crew', da:'Live-kort med din crew' },
+  'try.b2':     { es:'Estados y puntos de encuentro', en:'Statuses and meeting points', da:'Statusser og mødesteder' },
+  'try.b3':     { es:'Vista del organizador: solo datos agregados', en:'Organizer view: aggregated data only', da:'Arrangørvisning: kun aggregerede data' },
+  'try.cta':    { es:'Abrir la demo', en:'Open the demo', da:'Åbn demoen' },
+  'try.scan':   { es:'Escanea con la cámara de tu móvil', en:'Scan with your phone camera', da:'Scan med dit kamera' },
+  'try.note':   { es:'Datos simulados. No se guarda nada.', en:'Simulated data. Nothing is stored.', da:'Simulerede data. Intet gemmes.' },
+  'footer.app': { es:'Abrir app', en:'Open app', da:'Åbn app' },
+  'footer.tag': { es:'PROTOTIPO', en:'PROTOTYPE', da:'PROTOTYPE' }
+};
+
+let currentLang = 'es';
+(function(){
+  let l=new URLSearchParams(location.search).get('lang');
+  if(!l){ try{ l=localStorage.getItem('fyc4_lang'); }catch(e){} }
+  if(!l){ l=((navigator.language||'es')+'').slice(0,2).toLowerCase(); }
+  if(['es','en','da'].indexOf(l)>-1) currentLang=l;
+})();
+const LANG_FLAG = { es:'🇪🇸', en:'🇬🇧', da:'🇩🇰' };
+
+function applyLang(lang){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(translations[key]) el.textContent = translations[key][lang];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-html');
+    if(translations[key]) el.innerHTML = translations[key][lang];
+  });
+  document.querySelectorAll('[data-lang-current]').forEach(btn=>{
+    btn.textContent = LANG_FLAG[lang];
+  });
+  try{ localStorage.setItem('fyc4_lang', lang); }catch(e){}
+  // keep the language when jumping into the app
+  document.querySelectorAll('[data-app-demo]').forEach(a=>{ a.href='app/?demo=1&lang='+lang; });
+  document.querySelectorAll('[data-app-real]').forEach(a=>{ a.href='app/?lang='+lang; });
+  document.querySelectorAll('img[data-shot]').forEach(i=>{ i.src='assets/shot-'+i.dataset.shot+'-'+lang+'.jpg'; });
+}
+
+function closeAllLangMenus(){
+  document.querySelectorAll('[data-lang-menu]').forEach(m=>m.classList.remove('open'));
+  document.querySelectorAll('[data-lang-current]').forEach(b=>b.setAttribute('aria-expanded','false'));
+}
+
+document.querySelectorAll('[data-lang-current]').forEach(btn=>{
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const menu = btn.nextElementSibling;
+    const willOpen = !menu.classList.contains('open');
+    closeAllLangMenus();
+    if(willOpen){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  });
+});
+
+document.querySelectorAll('[data-lang-option]').forEach(opt=>{
+  opt.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentLang = opt.getAttribute('data-lang-option');
+    applyLang(currentLang);
+    closeAllLangMenus();
+  });
+});
+
+document.addEventListener('click', closeAllLangMenus);
+applyLang(currentLang);
+
+const burger = document.getElementById('burger');
+const panel = document.getElementById('mobilePanel');
+burger.addEventListener('click', () => {
+  const open = panel.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+});
+panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  panel.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+}));
+
+</script>
+<script>
+// QR for the demo: generated in the browser, so it always points at wherever this site is hosted.
+(function(){
+  try{
+    const url=new URL('app/?demo=1', location.href).href, m=FYCQR.matrix(url), n=m.length, q=4, d=n+q*2;
+    let p=''; for(let r=0;r<n;r++){ let run=0; for(let c=0;c<=n;c++){ if(c<n&&m[r][c]) run++; else if(run){ p+='M'+(c-run+q)+' '+(r+q)+'h'+run+'v1h-'+run+'z'; run=0; } } }
+    document.getElementById('qrBox').innerHTML='<svg viewBox="0 0 '+d+' '+d+'" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg"><rect width="'+d+'" height="'+d+'" fill="#fff"/><path d="'+p+'" fill="#1a1814"/></svg>';
+  }catch(e){ var c=document.getElementById('qrCard'); if(c) c.style.display='none'; }
+})();
+</script>
+
+</body>
+</html>

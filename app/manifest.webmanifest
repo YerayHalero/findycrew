@@ -1,0 +1,15 @@
+{
+  "name": "Find Y Crew",
+  "short_name": "Find Y Crew",
+  "description": "Real-time friend finder for festivals and events.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1814",
+  "theme_color": "#1a1814",
+  "icons": [
+    {"src": "../assets/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "../assets/icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}
