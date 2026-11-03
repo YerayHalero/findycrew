@@ -1,12 +1,12 @@
 # Mantiene activo el proyecto Supabase gratuito (que se pausa tras ~1 semana sin actividad)
-# haciendo una consulta mínima cada 2 días. La clave "anon" es pública por diseño
+# con una lectura y una escritura mínimas cada día (la escritura cuenta como actividad real). La clave "anon" es pública por diseño
 # (ya está en el HTML de la app), por eso no hace falta guardarla como secreto.
 # Si el proyecto YA está pausado, esta consulta falla y GitHub te avisa por correo:
 # entonces entra en el panel de Supabase y pulsa "Restore project".
 name: supabase-keepalive
 on:
   schedule:
-    - cron: '17 6 */2 * *'
+    - cron: '17 6 * * *'
   workflow_dispatch:
 jobs:
   ping:
@@ -17,7 +17,13 @@ jobs:
           SB_URL: https://jootvxinokfwffkdhony.supabase.co
           SB_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impvb3R2eGlub2tmd2Zma2Rob255Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzNDEyMTcsImV4cCI6MjA5MDkxNzIxN30.gJ7aDKudwWNb_WDsMUB8l375CmbD_C3O_-_EUCRmMbo
         run: |
-          curl -fsS --max-time 20 \
-            -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+          curl -fsS --max-time 20 -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
             "$SB_URL/rest/v1/positions?select=id&limit=1" > /dev/null
-          echo "Supabase responde: proyecto activo."
+          NOW=$(($(date +%s)*1000))
+          curl -fsS --max-time 20 -X POST -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+            -H "Content-Type: application/json" -H "Prefer: resolution=merge-duplicates,return=minimal" \
+            -d "[{\"id\":\"KEEPAL\",\"code\":\"KEEPAL\",\"name\":\"keepalive\",\"color\":\"#888888\",\"avatar\":\"🙂\",\"x\":0,\"y\":0,\"status\":\"\",\"status_expiry\":0,\"updated_at\":$NOW}]" \
+            "$SB_URL/rest/v1/positions" > /dev/null
+          curl -fsS --max-time 20 -X DELETE -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+            "$SB_URL/rest/v1/positions?id=eq.KEEPAL" > /dev/null
+          echo "Supabase responde (lectura + escritura): proyecto activo."
